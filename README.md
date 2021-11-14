@@ -22,4 +22,4 @@ If you wish to terminate the script at any moment you wish use the command `ctrl
 
 Quick Demo: below the solution fails on randomly generated test #2: <br>
 
-(![ ](https://i.ibb.co/L1Dp4H0/Strees-Testing.png))
+![ ](https://i.ibb.co/L1Dp4H0/Strees-Testing.png)
