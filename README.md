@@ -1,6 +1,6 @@
 # Strees_Testing
 
-##Stress.sh
+## Stress.sh
 
 Strees Testing is very important for every competitive programming to know if your code is accurated 100% or not, and if you want to know if it will be passed in the time limit or will exceeded it
 
@@ -26,7 +26,7 @@ Quick Demo: below the solution fails on randomly generated test #2: <br>
 
 
 
-##Time.sh
+## Time.sh
 
 Copy your solution which you want to check about his time to `Test.cpp`. <br>
 Change the `Generated.cpp` file so as to generate test cases according to the question. <br>
