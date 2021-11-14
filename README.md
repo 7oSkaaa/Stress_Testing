@@ -22,4 +22,4 @@ If you wish to terminate the script at any moment you wish use the command `ctrl
 
 Quick Demo: below the solution fails on randomly generated test #2: <br>
 
-(![ ](https://drive.google.com/file/d/10-9kzEjoLLits7SxC1fGgbA2fTVIyvBc/view?usp=sharing))
+(![ ](https://ufile.io/kx8uh93r))
