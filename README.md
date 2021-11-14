@@ -1,8 +1,8 @@
 # Strees_Testing
-Strees Testing is very important for every competitive programming to know if your code is accurated 100% or not, and if you want to know if it will be passed in the time limit or will exceeded it
 
-Installing
-Download this repository manually or by using git clone on terminal.
+##Stress.sh
+
+Strees Testing is very important for every competitive programming to know if your code is accurated 100% or not, and if you want to know if it will be passed in the time limit or will exceeded it
 
 ### Installing
 Download this repository manually or by using git clone on terminal.
@@ -23,3 +23,21 @@ If you wish to terminate the script at any moment you wish use the command `ctrl
 Quick Demo: below the solution fails on randomly generated test #2: <br>
 
 ![ ](https://i.ibb.co/L1Dp4H0/Strees-Testing.png)
+
+
+
+##Time.sh
+
+Copy your solution which you want to check about his time to `Test.cpp`. <br>
+Change the `Generated.cpp` file so as to generate test cases according to the question. <br>
+
+### Changing number of test cases
+
+You can run `Time.sh` from the terminal or you can run with **vscode** or any **IDE**
+You can open `Time.sh` an choose the number of test cases by editing the line `1`
+
+The `Time.sh` will excecute `Test.cpp` the number of times you want and print you the time that your code take and each time with distinct test
+
+Quick Demo: below the solution times on randomly generated test: <br>
+
+![ ](https://i.ibb.co/Dg2ZsJY/Time.png)
