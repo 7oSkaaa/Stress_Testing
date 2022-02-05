@@ -1,5 +1,7 @@
 # Strees_Testing
 
+<br><br>
+
 ## Stress.sh
 
 Strees Testing is very important for every competitive programming to know if your code is accurated 100% or not, and if you want to know if it will be passed in the time limit or will exceeded it
@@ -24,7 +26,9 @@ Quick Demo: below the solution fails on randomly generated test #2: <br>
 
 ![  ](https://i.ibb.co/L1Dp4H0/Strees-Testing.png)
 
-
+<br><br>
+<hr>
+<br><br>
 
 ## Time.sh
 
