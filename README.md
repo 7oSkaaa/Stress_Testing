@@ -8,7 +8,7 @@ Strees Testing is very important for every competitive programming to know if yo
 Download this repository manually or by using git clone on terminal.
 
 Copy your original solution which you expect might fail in the file `Test.cpp`. <br>
-Copy your brute force solution which is expected to give correct output in the file `Brute.cpp`. <br>
+Copy your brute force solution which is expected to give correct output in the file `Correct.cpp`. <br>
 Change the `Generated.cpp` file so as to generate test cases according to the question. <br>
 `Generated.cpp` will export the test cases to the `input.txt` file
 
