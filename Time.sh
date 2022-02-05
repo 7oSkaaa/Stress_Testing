@@ -1,6 +1,8 @@
-for((i = 1; i <= 20; i++));do
+tests=10
+
+for((i = 1; i <= $tests; i++));do
 echo $i 
 ./Generator $i
-time ./AhMeD_HoSSaM <input.txt> output
+time ./Test <input.txt> output
 echo " ";
 done

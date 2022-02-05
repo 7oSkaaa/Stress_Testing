@@ -33,22 +33,26 @@ using namespace __gnu_pbds;
 void AhMeD_HoSSaM(){
     ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
     #ifndef ONLINE_JUDGE
-        freopen("input.txt", "r", stdin), freopen("Brute_output.txt", "w", stdout);
+        freopen("input.txt", "r", stdin), freopen("Correct_output.txt", "w", stdout);
     #endif
 }
 
-void solve(){
-    ll n, sum = 0;
-    cin >> n;
-    for(int i = 1; i <= n; i++) sum += i;
-    cout << sum << "\n";  
-}
+void Solve(){
+    int a, b, c;
+    cin >> a >> b >> c;
+    int sum = a + c;
+    if(sum % 2 == 0 and sum / 2 >= b && ((sum / 2) % b == 0)) cout << "YES\n";
+    else if(((2 * b) - c) >= a && ((2 * b) - c) % a == 0) cout << "YES\n";
+    else if(((2 * b) - a) >= c && ((2 * b) - a) % c == 0) cout << "YES\n";
+    else cout << "NO\n";
+}   
+
 
 int main(){
     AhMeD_HoSSaM();
     int t = 1;
-    cin >> t;
+    //cin >> t;
     while(t--)
-        solve();
+        Solve();
     return 0;
 } 

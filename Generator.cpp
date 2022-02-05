@@ -75,6 +75,11 @@ namespace generator {
   }
 }
 
+template < typename T = int > istream& operator >> (istream &in, vector<T> &v) {
+    for (auto &x: v) in >> x;
+    return in;
+}
+
 using namespace generator;
 
 template < typename T = int >
@@ -90,14 +95,13 @@ ostream& operator << (ostream &other, const vector < pair < int, int > > &v) {
 }
 
 // comment the just below line if test cases required
-//#define SINGLE_TEST
-const int max_tests = 100;
+#define SINGLE_TEST
+const int max_tests = 5;
 
 // complete this function according to the requirements
 void generate_test() {
-    int n = rand(1, 100);
-    cout << n << '\n';
-    //cout << gen_array(n, 1, 100);
+    int a = rand(1, 20), b = rand(1, 20), c = rand(1, 20);
+    cout << a << " " << b << " " << c << '\n';
 }
 
 signed main() {

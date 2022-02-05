@@ -11,7 +11,7 @@ reset=$(tput sgr0);
 # You can change the version of C++ or add the compiler flags you wish
 g++ -std=c++17 Generator.cpp -o Generator || { echo ${bold}${orange}Compilation Error in ${reset} Generator.cpp; exit 1; }
 g++ -std=c++17 Test.cpp -o Test || { echo ${bold}${orange}Compilation Error${reset} in $Test.cpp; exit 1; }
-g++ -std=c++17 Brute.cpp -o Brute || { echo ${bold}${orange}Compilation Error${reset} in $Brute.cpp; exit 1; }
+g++ -std=c++17 Correct.cpp -o Correct || { echo ${bold}${orange}Compilation Error${reset} in $Correct.cpp; exit 1; }
 
 max_tests=10
 diff_found=0
@@ -28,11 +28,11 @@ do
 
     # run brute force solution, take input from above generated test case i.e. from input.txt
     # and save it in Brute_output.txt
-    ./Brute < input.txt > Brute_output.txt
+    ./Correct < input.txt > Correct_output.txt
 
     # check if files Test_output and Brute_output
     # differs(we are ignoring spaces and then comparing files)
-    if diff --tabsize=1 -F --label --side-by-side --ignore-space-change Test_output.txt Brute_output.txt > dont_show_on_terminal.txt; then
+    if diff --tabsize=1 -F --label --side-by-side --ignore-space-change Test_output.txt Correct_output.txt > dont_show_on_terminal.txt; then
         echo "${orange}test_case #$i: ${bold}${green}passed${reset}"
     else
         echo "${orange}test_case #$i: ${bold}${red}failed${reset}"
@@ -53,7 +53,7 @@ then
     echo ""
 
     echo "${blue}Expected: ${reset}"
-    cat Brute_output.txt
+    cat Correct_output.txt
     echo ""
 
     notify-send "Wrong Answer"
@@ -62,5 +62,5 @@ else
 fi
 
 rm Test_output.txt
-rm Brute_output.txt
+rm Correct_output.txt
 rm dont_show_on_terminal.txt
