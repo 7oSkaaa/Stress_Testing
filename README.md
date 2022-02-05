@@ -41,7 +41,3 @@ The `Time.sh` will excecute `Test.cpp` the number of times you want and print yo
 Quick Demo: below the solution times on randomly generated test: <br>
 
 ![ ](https://i.ibb.co/Dg2ZsJY/Time.png)
-
-
-The Orignal Code for Strees and Generator before any edit is from [Bhupendra Yadav Stress Testing bash script
-](https://github.com/bhupixb/Stress-Testing-bash-script) you can access it from here.
