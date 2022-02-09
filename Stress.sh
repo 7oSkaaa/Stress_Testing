@@ -9,12 +9,15 @@ bold=$(tput bold);
 reset=$(tput sgr0);
 white=$(tput setaf 15);
 
-# You can change the version of C++ or add the compiler flags you wish
-g++ -std=c++17 Generator.cpp -o Generator || { echo "${bold}${orange}"Compilation Error in "${reset}" Generator.cpp; exit 1; }
-g++ -std=c++17 Test.cpp -o Test || { echo "${bold}${orange}Compilation Error${reset}" in Test.cpp; exit 1; }
-g++ -std=c++17 Correct.cpp -o Correct || { echo "${bold}${orange}Compilation Error${reset}" in Correct.cpp; exit 1; }
+#Get current Directory
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-#Change number of testcases
+# You can change the version of C++ or add the compiler flags you wish
+g++ -std=c++17 "$SCRIPT_DIR"/Generator.cpp -o Generator || { echo "${bold}${orange}"Compilation Error in "${reset}" Generator.cpp; exit 1; }
+g++ -std=c++17 "$SCRIPT_DIR"/Test.cpp -o Test || { echo "${bold}${orange}Compilation Error${reset}" in Test.cpp; exit 1; }
+g++ -std=c++17 "$SCRIPT_DIR"/Correct.cpp -o Correct || { echo "${bold}${orange}Compilation Error${reset}" in Correct.cpp; exit 1; }
+
+#Change number of testcasescc1plus: fatal error: Generator.cpp: No such file or directory
 max_tests=10
 diff_found=0
 i=1
