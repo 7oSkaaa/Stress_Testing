@@ -7,11 +7,12 @@ blue=$(tput setaf 32);
 orange=$(tput setaf 178);
 bold=$(tput bold);
 reset=$(tput sgr0);
+white=$(tput setaf 15);
 
 # You can change the version of C++ or add the compiler flags you wish
 g++ -std=c++17 Generator.cpp -o Generator || { echo ${bold}${orange}Compilation Error in ${reset} Generator.cpp; exit 1; }
-g++ -std=c++17 Test.cpp -o Test || { echo ${bold}${orange}Compilation Error${reset} in $Test.cpp; exit 1; }
-g++ -std=c++17 Correct.cpp -o Correct || { echo ${bold}${orange}Compilation Error${reset} in $Correct.cpp; exit 1; }
+g++ -std=c++17 Test.cpp -o Test || { echo ${bold}${orange}Compilation Error${reset} in Test.cpp; exit 1; }
+g++ -std=c++17 Correct.cpp -o Correct || { echo ${bold}${orange}Compilation Error${reset} in Correct.cpp; exit 1; }
 
 max_tests=10
 diff_found=0
@@ -44,15 +45,15 @@ done
 
 if [ $diff_found -eq 1 ]
 then
-    echo "${blue}Input: ${reset}"
+    echo "${white}Input: ${blue}"
     cat input.txt
     echo ""
 
-    echo "${blue}Output: ${reset}"
+    echo "${white}Output: ${blue}"
     cat Test_output.txt
     echo ""
 
-    echo "${blue}Expected: ${reset}"
+    echo "${white}Expected: ${blue}"
     cat Correct_output.txt
     echo ""
 
