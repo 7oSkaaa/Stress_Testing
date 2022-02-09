@@ -27,7 +27,7 @@ using namespace std;
 #define EPS 1e-9
 #define PI acos(-1)
 
-void AhMeD_HoSSaM(){
+void Fast_IO(){
     ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
     #ifndef ONLINE_JUDGE
         freopen("input.txt", "r", stdin), freopen("Test_output.txt", "w", stdout); 
@@ -39,7 +39,7 @@ void Solve(){
 }
 
 int main(){
-    AhMeD_HoSSaM();
+    Fast_IO();
     int t = 1;
     //cin >> t;
     while(t--)

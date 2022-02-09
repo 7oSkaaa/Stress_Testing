@@ -30,7 +30,7 @@ using namespace __gnu_pbds;
 #define EPS 1e-9
 #define PI acos(-1)
 
-void AhMeD_HoSSaM(){
+void Fast_IO(){
     ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
     #ifndef ONLINE_JUDGE
         freopen("input.txt", "r", stdin), freopen("Correct_output.txt", "w", stdout);
@@ -38,18 +38,11 @@ void AhMeD_HoSSaM(){
 }
 
 void Solve(){
-    int a, b, c;
-    cin >> a >> b >> c;
-    int sum = a + c;
-    if(sum % 2 == 0 and sum / 2 >= b && ((sum / 2) % b == 0)) cout << "YES\n";
-    else if(((2 * b) - c) >= a && ((2 * b) - c) % a == 0) cout << "YES\n";
-    else if(((2 * b) - a) >= c && ((2 * b) - a) % c == 0) cout << "YES\n";
-    else cout << "NO\n";
+    
 }   
 
-
 int main(){
-    AhMeD_HoSSaM();
+    Fast_IO();
     int t = 1;
     //cin >> t;
     while(t--)
