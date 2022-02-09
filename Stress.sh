@@ -61,6 +61,9 @@ else
     notify-send "Accepted"
 fi
 
+rm Correct
+rm Generator
+rm Test
 rm Test_output.txt
 rm Correct_output.txt
 rm dont_show_on_terminal.txt
