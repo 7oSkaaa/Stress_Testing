@@ -1,5 +1,7 @@
 # Strees_Testing
 
+<br><br>
+
 ## Stress.sh
 
 Strees Testing is very important for every competitive programming to know if your code is accurated 100% or not, and if you want to know if it will be passed in the time limit or will exceeded it
@@ -8,7 +10,7 @@ Strees Testing is very important for every competitive programming to know if yo
 Download this repository manually or by using git clone on terminal.
 
 Copy your original solution which you expect might fail in the file `Test.cpp`. <br>
-Copy your brute force solution which is expected to give correct output in the file `Brute.cpp`. <br>
+Copy your brute force solution which is expected to give correct output in the file `Correct.cpp`. <br>
 Change the `Generated.cpp` file so as to generate test cases according to the question. <br>
 `Generated.cpp` will export the test cases to the `input.txt` file
 
@@ -24,7 +26,9 @@ Quick Demo: below the solution fails on randomly generated test #2: <br>
 
 ![  ](https://i.ibb.co/L1Dp4H0/Strees-Testing.png)
 
-
+<br><br>
+<hr>
+<br><br>
 
 ## Time.sh
 
