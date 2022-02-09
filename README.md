@@ -36,7 +36,7 @@ sudo apt-get install notify-osd
 
 Quick Demo: below the solution fails on randomly generated test #2: <br>
 
-![  ](https://i.ibb.co/L1Dp4H0/Strees-Testing.png)
+![  ](https://i.ibb.co/3drRPL4/Screenshot-from-2022-02-09-23-19-36.png)
 
 
 <br><br>
