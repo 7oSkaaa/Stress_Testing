@@ -22,9 +22,22 @@ You can open `Strees.sh` an choose the number of test cases by editing the line 
 Output:<br> The output of running file `Strees.sh` on every test case is either `Accepted` if your solution's output matches the brute solution output or `Wrong Answer` and will show the input on which the solution failed, the output of your solution and expected output according to the brute force solution on terminal and the script will be terminated. Now you can debug your original solution and check where it goes wrong. <br>
 If you wish to terminate the script at any moment you wish use the command `ctrl + c` in your terminal.<br>
 
+### Install Notify-Send
+
+
+We will install notify-send to send to us notification with accepted or wrong answer
+
+
+```
+sudo apt-get install notify-osd
+```
+
+<br> <br>
+
 Quick Demo: below the solution fails on randomly generated test #2: <br>
 
 ![  ](https://i.ibb.co/L1Dp4H0/Strees-Testing.png)
+
 
 <br><br>
 <hr>
