@@ -57,4 +57,4 @@ The `Time.sh` will excecute `Test.cpp` the number of times you want and print yo
 
 Quick Demo: below the solution times on randomly generated test: <br>
 
-![ ](https://i.ibb.co/Dg2ZsJY/Time.png)
+![image](https://user-images.githubusercontent.com/63050133/153291510-924cd5ec-ea1b-4421-8947-ccd0419f2dda.png)
