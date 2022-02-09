@@ -10,9 +10,9 @@ reset=$(tput sgr0);
 white=$(tput setaf 15);
 
 # You can change the version of C++ or add the compiler flags you wish
-g++ -std=c++17 Generator.cpp -o Generator || { echo ${bold}${orange}Compilation Error in ${reset} Generator.cpp; exit 1; }
-g++ -std=c++17 Test.cpp -o Test || { echo ${bold}${orange}Compilation Error${reset} in Test.cpp; exit 1; }
-g++ -std=c++17 Correct.cpp -o Correct || { echo ${bold}${orange}Compilation Error${reset} in Correct.cpp; exit 1; }
+g++ -std=c++17 Generator.cpp -o Generator || { echo "${bold}${orange}"Compilation Error in "${reset}" Generator.cpp; exit 1; }
+g++ -std=c++17 Test.cpp -o Test || { echo "${bold}${orange}Compilation Error${reset}" in Test.cpp; exit 1; }
+g++ -std=c++17 Correct.cpp -o Correct || { echo "${bold}${orange}Compilation Error${reset}" in Correct.cpp; exit 1; }
 
 max_tests=10
 diff_found=0
