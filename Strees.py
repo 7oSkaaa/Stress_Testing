@@ -2,10 +2,10 @@ import os
 import subprocess
 
 #Colors to use
-red = '\033[31m'
-green = '\033[32m'
+red = '\033[38;5;196m'
+green = '\033[38;5;40m'
 blue = '\033[34m'
-gold = '\033[33m'
+gold = '\033[38;5;220m'
 white = '\33[37m'
 magenta = '\033[35m'
 bold = '\033[01m'
@@ -16,7 +16,7 @@ directory = os.path.dirname(os.path.realpath(__file__))
 os.chdir(directory)
 
 #number of test cases 
-tests = int(input(f'{magenta}Enter number of testcases: {white}'))
+tests = int(input(f'{magenta}\nEnter number of testcases: {white}'))
 check_diff, Input, Correct_output, Test_output = check_diff = False, "", "", ""
 
 #Compile the files
@@ -46,9 +46,9 @@ for i in range(1, tests + 1):
     Correct_output = open("Correct_output.txt").read().strip()
     Test_output = open("Test_output.txt").read().strip()
     if Correct_output == Test_output:
-        print(f'\n{bold}{gold}Test {i}: {green}Passed')
+        print(f'\n{bold}{gold}Test_Case #{i}: {green}Passed')
     else:
-        print(f'\n{bold}{gold}Test {i}: {red}failed')
+        print(f'\n{bold}{gold}Test_Case #{i}: {red}failed')
         check_diff = True
         break
     

@@ -35,8 +35,14 @@ void Fast_IO(){
 }
 
 void Solve(){
-    
-}
+    int a, b, c;
+    cin >> a >> b >> c;
+    int sum = a + c;
+    if(sum % 2 == 0 and sum / 2 >= b && ((sum / 2) % 2 == 0)) cout << "YES\n";
+    else if(((2 * b) - c) >= a && ((2 * b) - c) % a == 0) cout << "YES\n";
+    else if(((2 * b) - a) >= c && ((2 * b) - a) % c == 0) cout << "YES\n";
+    else cout << "NO\n";
+}   
 
 int main(){
     Fast_IO();

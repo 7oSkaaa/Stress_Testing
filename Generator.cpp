@@ -100,7 +100,7 @@ const int max_tests = 5;
 
 // complete this function according to the requirements
 void generate_test() {
-    
+    cout << rand(1, 100) << " " << rand(1, 100) << " " << rand(1, 100) << "\n";   
 }
 
 signed main() {

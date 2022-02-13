@@ -37,8 +37,39 @@ void Fast_IO(){
     #endif
 }
 
+bool change(int a, int b, int c, int idx){
+    if(idx == 0){
+        ll to_be;
+        if(b > c) to_be = b + (b - c);
+        else to_be = b - (c - b);
+        if(to_be % a == 0)
+            a = (to_be / a) * a;
+    }else if(idx == 2){
+        ll to_be;
+        if(a > b) to_be = b - (a - b);
+        else to_be = b + (b - a);
+        if(to_be % c == 0)
+            c = (to_be / c) * c;
+    }else {
+        if((a - c) % 2 != 0) return false;
+        ll to_be = a - ((a - c) / 2);        
+        if(to_be % b == 0)
+            b = (to_be / b) * b;
+    }
+    return b - a == c - b && a > 0 && b > 0 && c > 0;
+}
+ 
 void Solve(){
-    
+    ll a, b, c;
+    cin >> a >> b >> c;
+    if(a - b == b - c) cout << "YES\n";
+    else {
+        bool can = false;
+        can |= change(a, b, c, 0);
+        can |= change(a, b, c, 1);
+        can |= change(a, b, c, 2);
+        cout << (can ? "YES" : "NO") << '\n';
+    }
 }   
 
 int main(){

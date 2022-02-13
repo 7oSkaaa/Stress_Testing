@@ -38,9 +38,11 @@ do
     # check if files Test_output and Brute_output
     # differs(we are ignoring spaces and then comparing files)
     if diff --tabsize=1 -F --label --side-by-side --ignore-space-change Test_output.txt Correct_output.txt > dont_show_on_terminal.txt; then
-        echo "${orange}test_case #$i: ${bold}${green}passed${reset}"
+        echo ""
+        echo "${orange}Test_Case #$i: ${bold}${green}Passed${reset}"
     else
-        echo "${orange}test_case #$i: ${bold}${red}failed${reset}"
+        echo ""
+        echo "${orange}test_case #$i: ${bold}${red}Failed${reset}"
         diff_found=1
         break
     fi
@@ -49,17 +51,17 @@ done
 
 if [ $diff_found -eq 1 ]
 then
+    echo ""
     echo "${white}Input: ${blue}"
     cat input.txt
-    echo ""
 
+    echo ""
     echo "${white}Output: ${blue}"
     cat Test_output.txt
-    echo ""
 
+    echo ""
     echo "${white}Expected: ${blue}"
     cat Correct_output.txt
-    echo ""
 
     notify-send "Wrong Answer"
 else
@@ -72,3 +74,4 @@ rm Test
 rm Test_output.txt
 rm Correct_output.txt
 rm dont_show_on_terminal.txt
+echo ""
