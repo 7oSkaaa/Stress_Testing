@@ -36,12 +36,11 @@ If you wish to terminate the script at any moment you wish use the command `ctrl
 
 <br> <br>
 
-Quick Demo: below the solution fails on randomly generated test #5: 
+Quick Demo: below the solution fails on randomly generated test #3: 
 
 <br>
 
-![Screenshot from 2022-02-13 21-43-38](https://user-images.githubusercontent.com/63050133/153771930-0525c5bb-5bd5-48f4-8fdc-0934a46ea56a.png)
-
+![Screenshot from 2022-02-13 21-47-31](https://user-images.githubusercontent.com/63050133/153772056-297544a4-c32b-461a-919f-7b62882ec950.png)
 <br><br>
 
 ## Stress.sh
