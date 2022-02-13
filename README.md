@@ -36,11 +36,11 @@ If you wish to terminate the script at any moment you wish use the command `ctrl
 
 <br> <br>
 
-Quick Demo: below the solution fails on randomly generated test #2: 
+Quick Demo: below the solution fails on randomly generated test #5: 
 
 <br>
 
-![Screenshot from 2022-02-13 21-31-58](https://user-images.githubusercontent.com/63050133/153771507-b75281bf-a75c-4b32-bf22-e5859c81fd4e.png)
+![Screenshot from 2022-02-13 21-43-38](https://user-images.githubusercontent.com/63050133/153771930-0525c5bb-5bd5-48f4-8fdc-0934a46ea56a.png)
 
 <br><br>
 
