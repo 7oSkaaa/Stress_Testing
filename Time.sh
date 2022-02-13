@@ -8,6 +8,7 @@ bold=$(tput bold);
 
 #Change number of testcases
 tests=5
+i=1
 
 #Get current Directory
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
@@ -17,9 +18,9 @@ g++ -std=c++17 "$SCRIPT_DIR"/Generator.cpp -o Generator || { echo "${bold}${oran
 
 g++ -std=c++17 "$SCRIPT_DIR"/Test.cpp -o Test || { echo "${bold}${orange}Compilation Error${reset}" in Test.cpp; exit 1; }
 
-
-for((i = 1; i <= $tests; i++));do
-echo "${orange}test_case #$i: ${white}"
+while [ $i -le $tests ]
+do
+    echo "${orange}test_case #$i: ${white}"
 
     # Generate test_case and save it in input.txt
     ./Generator > input.txt
@@ -27,6 +28,7 @@ echo "${orange}test_case #$i: ${white}"
     # Check time for Test.cpp
     time ./Test <input.txt> output
     echo " ";
+    i=$((i+1))
 done
 
 #Delete the files that we don't need it after finished
