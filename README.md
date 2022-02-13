@@ -1,6 +1,10 @@
 # Strees_Testing
 
-<br><br>
+<br>
+
+### [Tutorial Video](https://www.youtube.com/watch?v=8UvUyVjpWdU)
+
+<br>
 
 ## Stress.sh
 
@@ -17,7 +21,7 @@ Change the `Generated.cpp` file so as to generate test cases according to the qu
 You can run `Strees.sh` from the terminal or you can run with **vscode** or any **IDE**
 
 ### Changing number of test cases
-You can open `Strees.sh` an choose the number of test cases by editing the line `18`
+You can open `Strees.sh` an choose the number of test cases by editing the line `21`
 
 Output:<br> The output of running file `Strees.sh` on every test case is either `Accepted` if your solution's output matches the brute solution output or `Wrong Answer` and will show the input on which the solution failed, the output of your solution and expected output according to the brute force solution on terminal and the script will be terminated. Now you can debug your original solution and check where it goes wrong. <br>
 If you wish to terminate the script at any moment you wish use the command `ctrl + c` in your terminal.<br>
@@ -36,7 +40,7 @@ sudo apt-get install notify-osd
 
 Quick Demo: below the solution fails on randomly generated test #2: <br>
 
-![  ](https://i.ibb.co/L1Dp4H0/Strees-Testing.png)
+![  ](https://i.ibb.co/3drRPL4/Screenshot-from-2022-02-09-23-19-36.png)
 
 
 <br><br>
@@ -57,4 +61,4 @@ The `Time.sh` will excecute `Test.cpp` the number of times you want and print yo
 
 Quick Demo: below the solution times on randomly generated test: <br>
 
-![ ](https://i.ibb.co/Dg2ZsJY/Time.png)
+![image](https://user-images.githubusercontent.com/63050133/153291510-924cd5ec-ea1b-4421-8947-ccd0419f2dda.png)
