@@ -11,27 +11,28 @@ int32_t permutation[N];
 
 mt19937 rng(accuracy);
 
-int rand(int l, int r){
-    uniform_int_distribution < int > ludo(l, r); return ludo(rng);
-}
-
 const int inf = 1LL << 31;
 
 using pii = pair < int, int >;
 
 namespace generator {
+
+    int gen_int(int l, int r){
+        uniform_int_distribution < int > ludo(l, r); return ludo(rng);
+    }
+
   string gen_string(int len = 0, bool upperCase = false, int l = 1, int r = 26) {
       assert(len >= 0 && len <= 5e6);
       string str(len, (upperCase ? 'A' : 'a'));
       for (char &ch: str) {
-        ch += rand(l, r) - 1;
+        ch += gen_int(l, r) - 1;
       }
       return str;
   }
   vector<int> gen_array(int len = 0, int minRange = 0, int maxRange = inf){
       assert(len >= 0 and len <= 5e6);
       vector<int> a(len);
-      for (int &x: a) x = rand(minRange, maxRange);
+      for (int &x: a) x = gen_int(minRange, maxRange);
       return a;
   }
   vector < pair < int, int > > gen_tree(int n = 0){
@@ -49,7 +50,7 @@ namespace generator {
       iota(permutation, permutation + 1 + n, 0);
       shuffle(permutation + 1, permutation + 1 + n, rng);
       for(int i = 2; i <= n; ++i){
-        int u = i, v = rand(1 , i - 1);
+        int u = i, v = gen_int(1 , i - 1);
         u = permutation[u], v = permutation[v];
         res[i - 2] = minmax(u, v); // u < v, just for convenience while debugging
       }
@@ -64,7 +65,7 @@ namespace generator {
     set < pii > edge(res.begin(), res.end());
     for (int i = n; i <= m; ++i) {
       while (true) {
-        int u = rand(1, n), v = rand(1, n);
+        int u = gen_int(1, n), v = gen_int(1, n);
         if (u == v) continue;
         auto it = edge.insert(minmax(u, v));
         if (it.second) break;
@@ -75,12 +76,12 @@ namespace generator {
   }
 }
 
+using namespace generator;
+
 template < typename T = int > istream& operator >> (istream &in, vector<T> &v) {
     for (auto &x: v) in >> x;
     return in;
 }
-
-using namespace generator;
 
 template < typename T = int >
 ostream& operator << (ostream &other, const vector<T> &v) {
@@ -111,6 +112,6 @@ signed main() {
       t = rand(1, max_tests), cout << t << '\n';
     #endif
     while (t--) {
-      generate_test();
+        generate_test();
     }
 }
