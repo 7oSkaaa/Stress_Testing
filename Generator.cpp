@@ -83,8 +83,7 @@ template < typename T = int > istream& operator >> (istream &in, vector<T> &v) {
     return in;
 }
 
-template < typename T = int >
-ostream& operator << (ostream &other, const vector<T> &v) {
+template < typename T = int > ostream& operator << (ostream &other, const vector<T> &v) {
     for (const T &x: v) other << x << ' ';
     other << '\n';
     return other;
