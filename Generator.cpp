@@ -103,7 +103,7 @@ const int max_tests = 5;
 
 // complete this function according to the requirements
 void generate_test() {
-       
+    
 }
 
 signed main() {
