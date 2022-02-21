@@ -21,12 +21,20 @@ namespace generator {
         uniform_int_distribution < int > ludo(l, r); return ludo(rng);
     }
 
-  	string gen_string(int len = 0, bool upperCase = false, int l = 1, int r = 26) {
+  	string gen_string(int len = 0, bool upperCase = false, int l = 1, int r = 26){
 		assert(len >= 0 && len <= 5e6);
 		string str(len, (upperCase ? 'A' : 'a'));
-		for (char &ch: str) {
+		for (char &ch: str) 
 			ch += gen_int(l, r) - 1;
-		}
+		return str;
+  	}
+
+	string gen_bit_int(int len = 0, int l = 1, int r = 10){
+		assert(len >= 0 && len <= 5e6);
+		string str(len, '0');
+		for (char &ch: str) 
+			ch += gen_int(l, r) - 1;
+		if(str.front() == '0') str.front() += gen_int(l + 1, r) - 1;		
 		return str;
   	}
 
@@ -103,7 +111,7 @@ const int max_tests = 5;
 
 // complete this function according to the requirements
 void generate_test() {
-    
+	
 }
 
 signed main() {
