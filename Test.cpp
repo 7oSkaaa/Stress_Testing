@@ -34,50 +34,8 @@ void Fast_IO(){
     #endif
 }
 
-string comp(string& a, string& b){
-    if(sz(a) != sz(b)) return (sz(a) > sz(b) ? a : b);
-    for(int i = 0; i < sz(a); i++){
-        if(a[i] != b[i])
-            return (a[i] > b[i] ? a : b);
-    }
-    return a;
-}
-
 void Solve(){
-    string s;
-    cin >> s;
-    int sum = 0, Max = 0, idx = 0;
-    for(int i = 0; i < sz(s) - 1; i++){
-        sum = (s[i] - '0') + (s[i + 1] - '0');
-        if(Max < sum)
-            Max = sum, idx = i;
-    }
-    if(Max < 10){
-        for(int i = 0; i < sz(s) - 1; i++){
-            if((s[i + 1] - '0') + (s[i] - '0') >= (s[i] - '0')){
-                Max = (s[i] - '0') + (s[i + 1] - '0');
-                idx = i;
-                break;
-            }
-        }
-    }
-    string t, t2;
-    for(int i = 0; i < sz(s); i++){
-        if(i != idx) t += s[i];
-        else t += to_string(Max), i++;
-    }
-    for(int i = sz(s) - 2; i >= 0; i--){
-        sum = (s[i] - '0') + (s[i + 1] - '0');
-        if(sum > 9){
-            Max = sum, idx = i;
-            break;
-        }
-    }
-    for(int i = 0; i < sz(s); i++){
-        if(i != idx) t2 += s[i];
-        else t2 += to_string(Max), i++;
-    }
-    cout << comp(t, t2) << "\n";
+    
 }
 
 int main(){

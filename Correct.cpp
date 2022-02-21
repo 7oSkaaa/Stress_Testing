@@ -37,26 +37,8 @@ void Fast_IO(){
     #endif
 }
 
-string comp(string& a, string& b){
-    if(sz(a) != sz(b)) return (sz(a) > sz(b) ? a : b);
-    for(int i = 0; i < sz(a); i++){
-        if(a[i] != b[i])
-            return (a[i] > b[i] ? a : b);
-    }
-    return a;
-}
-
 void Solve(){
-    string s;
-    cin >> s;
-    string Max;
-    for(int i = 0; i < sz(s) - 1; i++){
-        string t = s.substr(0, i);
-        t += to_string((int)(s[i] - '0') + (s[i + 1] - '0'));
-        t += s.substr(i + 2, sz(s) - (i + 1));
-        Max = comp(Max, t);
-    }
-    cout << Max << "\n";
+    
 }
 
 int main(){
