@@ -126,11 +126,6 @@ ostream& operator << (ostream &other, const vector < pair < int, int > > &v) {
     return other;
 }
 
-ostream& operator << (ostream &other, const vector < pair < int, int > > &v) {
-    for (const auto &x : v) other << x.first << ' ' << x.second << '\n';
-    return other;
-}
-
 // comment the just below line if test cases required
 #define SINGLE_TEST
 const int max_tests = 5;
