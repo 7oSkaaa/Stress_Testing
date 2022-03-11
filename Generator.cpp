@@ -54,6 +54,14 @@ namespace generator {
         return vec;
     }
 
+    vector < vector < ll > > gen_array_2D(int row = 0, int col, ll minRange = -INF, int maxRange = INF){
+        assert(row >= 0 and row <= 5e6 && col >= 0 && col <= 5e6 && row * col <= 1e8);
+        vector < vector < ll > > vec(row);
+        for(int i = 0; i < row; i++)
+            vec[i] = gen_array(col);
+        return vec;
+    }
+
     vector < ll > gen_permutation(int len = 0, ll minRange = -INF, ll maxRange = INF){
         assert(len >= 0 && len <= 5e6);
         vector < ll > vec(len);
@@ -70,6 +78,14 @@ namespace generator {
 		if(str.front() == '0') str.front() += gen_int(l + 1, r) - 1;		
 		return str;
   	}
+
+    char gen_char(bool upperCase = false, bool Digit = false){
+        if(upperCase)
+            return 'A' + gen_int(1, 26) - 1;
+        if(Digit)
+            return '0' + gen_int(1, 10) - 1;
+        return 'a' + gen_int(1, 26) - 1;
+    }
 
     vector < pii > gen_tree(ll n = 0){
         assert(n >= 0);
@@ -132,7 +148,7 @@ const int max_tests = 5;
 
 // complete this function according to the requirements
 void generate_test() {
-	
+
 }
 
 signed main() {
