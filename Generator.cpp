@@ -54,7 +54,7 @@ namespace generator {
         return vec;
     }
 
-    vector < vector < ll > > gen_array_2D(int row = 0, int col, ll minRange = -INF, int maxRange = INF){
+    vector < vector < ll > > gen_array_2D(int row = 0, int col = 0, ll minRange = -INF, int maxRange = INF){
         assert(row >= 0 and row <= 5e6 && col >= 0 && col <= 5e6 && row * col <= 1e8);
         vector < vector < ll > > vec(row);
         for(int i = 0; i < row; i++)
