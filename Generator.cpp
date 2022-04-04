@@ -79,6 +79,13 @@ namespace generator {
 		return str;
   	}
 
+    vector < pii > gen_array_of_pair(int len = 0, ll minRange = -INF, ll maxRange = INF){
+        assert(len >= 0 and len <= 5e6);
+        vector < pii > vec(len);
+        for (auto &[l, r]: vec) l = gen_int(minRange, maxRange), r = gen_int(l, maxRange);
+        return vec;
+    }
+
     char gen_char(bool upperCase = false, bool Digit = false){
         if(upperCase)
             return 'A' + gen_int(1, 26) - 1;
@@ -137,7 +144,7 @@ template < typename T = int > ostream& operator << (ostream &other, const vector
     return other;
 }
 
-ostream& operator << (ostream &other, const vector < pair < int, int > > &v) {
+ostream& operator << (ostream &other, const vector < pair < ll, ll > > &v) {
     for (const auto &x : v) other << x.first << ' ' << x.second << '\n';
     return other;
 }
@@ -148,7 +155,7 @@ const int max_tests = 5;
 
 // complete this function according to the requirements
 void generate_test() {
-
+    
 }
 
 signed main() {
