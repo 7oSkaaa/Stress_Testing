@@ -104,7 +104,7 @@ namespace generator {
 		if (rng() % 7 == 0) { // star tree
 			for (int i = 2; i <= n; ++i) res[i-2] = {1, i};
 			return res;
-	}*/
+	    }*/
 		iota(permutation, permutation + 1 + n, 0);
 		shuffle(permutation + 1, permutation + 1 + n, rng);
 		for(int i = 2; i <= n; ++i){
