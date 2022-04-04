@@ -17,6 +17,7 @@ using pii = pair < ll, ll >;
 
 namespace generator {
 
+	
 	ll gen_int(ll l = -INF, ll r = INF){
 		uniform_int_distribution < ll > ludo(l, r); return ludo(rng);
 	}
