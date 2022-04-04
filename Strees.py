@@ -23,19 +23,19 @@ check_diff, Input, Correct_output, Test_output = check_diff = False, "", "", ""
 try:
     subprocess.run(["g++", "{}/Generator.cpp".format(directory), "-o", "{}/Generator".format(directory)], check= True, stdout=subprocess.PIPE,stderr=subprocess.PIPE)
 except subprocess.CalledProcessError as e:
-    print(f'{bold}{red}\nCompilation Error in Generator.cpp{reset}\n')
+    print(f'{bold}{red}\nCompilation Error in Generator.cpp ⚠️{reset}\n')
     exit(0)
 
 try:
     subprocess.run(["g++", "{}/Correct.cpp".format(directory), "-o", "{}/Correct".format(directory)], check= True, stdout=subprocess.PIPE,stderr=subprocess.PIPE)
 except subprocess.CalledProcessError as e:
-    print(f'{bold}{red}\nCompilation Error in Correct.cpp{reset}\n')
+    print(f'{bold}{red}\nCompilation Error in Correct.cpp ⚠️{reset}\n')
     exit(0)
     
 try:
     subprocess.run(["g++", "{}/Test.cpp".format(directory), "-o", "{}/Test".format(directory)], check= True, stdout=subprocess.PIPE,stderr=subprocess.PIPE)
 except subprocess.CalledProcessError as e:
-    print(f'{bold}{red}\nCompilation Error in Test.cpp{reset}\n')
+    print(f'{bold}{red}\nCompilation Error in Test.cpp ⚠️{reset}\n')
     exit(0)
 
 for i in range(1, tests + 1):
