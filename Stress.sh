@@ -13,9 +13,9 @@ white=$(tput setaf 15);
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # You can change the version of C++ or add the compiler flags you wish
-g++ -std=c++17 "$SCRIPT_DIR"/Generator.cpp -o Generator || { echo "${bold}${orange}"Compilation Error in "${reset}" Generator.cpp; exit 1; }
-g++ -std=c++17 "$SCRIPT_DIR"/Test.cpp -o Test || { echo "${bold}${orange}Compilation Error${reset}" in Test.cpp; exit 1; }
-g++ -std=c++17 "$SCRIPT_DIR"/Correct.cpp -o Correct || { echo "${bold}${orange}Compilation Error${reset}" in Correct.cpp; exit 1; }
+g++ -std=c++17 "$SCRIPT_DIR"/Generator.cpp -o Generator || { echo "${bold}${orange}Compilation Error ⚠️${reset}" in Generator.cpp; exit 1; }
+g++ -std=c++17 "$SCRIPT_DIR"/Test.cpp -o Test || { echo "${bold}${orange}Compilation Error ⚠️${reset}" in Test.cpp; exit 1; }
+g++ -std=c++17 "$SCRIPT_DIR"/Correct.cpp -o Correct || { echo "${bold}${orange}Compilation Error ⚠️${reset}" in Correct.cpp; exit 1; }
 
 #Change number of testcasescc1plus: fatal error: Generator.cpp: No such file or directory
 max_tests=10
@@ -39,10 +39,10 @@ do
     # differs(we are ignoring spaces and then comparing files)
     if diff --tabsize=1 -F --label --side-by-side --ignore-space-change Test_output.txt Correct_output.txt > dont_show_on_terminal.txt; then
         echo ""
-        echo "${orange}Test_Case #$i: ${bold}${green}Passed${reset}"
+        echo "${orange}Test_Case #$i: ${bold}${green}Passed ✅${reset}"
     else
         echo ""
-        echo "${orange}test_case #$i: ${bold}${red}Failed${reset}"
+        echo "${orange}test_case #$i: ${bold}${red}Failed ❌${reset}"
         diff_found=1
         break
     fi
@@ -63,9 +63,9 @@ then
     echo "${white}Expected: ${blue}"
     cat Correct_output.txt
 
-    notify-send "Wrong Answer"
+    notify-send "Wrong Answer ❌"
 else
-    notify-send "Accepted"
+    notify-send "Accepted ✅"
 fi
 
 rm Correct
