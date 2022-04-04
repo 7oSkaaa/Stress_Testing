@@ -124,10 +124,10 @@ namespace generator {
 		set < pii > edge(res.begin(), res.end());
 		for (int i = n; i <= m; ++i) {
 			while (true) {
-			ll u = gen_int(1, n), v = gen_int(1, n);
-			if (u == v) continue;
-			auto it = edge.insert(minmax(u, v));
-			if (it.second) break;
+                ll u = gen_int(1, n), v = gen_int(1, n);
+                if (u == v) continue;
+                auto it = edge.insert(minmax(u, v));
+                if (it.second) break;
 			}
 		}
 		res.assign(edge.begin(), edge.end());
