@@ -29,6 +29,19 @@ namespace generator {
 		return str;
 	}
 
+	string gen_string_u_and_l(int len = 0, ll l = 1, ll r = 26){
+		assert(len >= 0 && len <= 5e6);
+		string str(len, 'A');
+		for(auto& ch : str){
+		    bool is_upper = gen_int(0, 1);
+		    if(is_upper)
+				ch += gen_int(l, r) - 1;
+		    else
+				ch += gen_int(32 + l, 32 + r) - 1;
+		}
+		return str;
+	}
+	
 	string gen_palindrome(int len = 0, bool upperCase = false, ll l = 1, ll r = 26){
 		assert(len >= 0 && len <= 5e6);
 		string str(len, (upperCase ? 'A' : 'a'));
@@ -85,12 +98,12 @@ namespace generator {
 		return vec;
 	}
 
-	char gen_char(bool upperCase = false, bool Digit = false){
+	char gen_char(bool upperCase = false, bool Digit = false, char l = 'a', char r = 'z'){
 		if(upperCase)
-			return 'A' + gen_int(1, 26) - 1;
+			return 'A' + gen_int(l - 'A' + 1, r - 'A' + 1) - 1;
 		if(Digit)
-			return '0' + gen_int(1, 10) - 1;
-		return 'a' + gen_int(1, 26) - 1;
+			return '0' + gen_int(l - '0' + 1, r - '0' + 1) - 1;
+		return 'a' + gen_int(l - 'a' + 1, r - 'a' + 1) - 1;
 	}
 
 	vector < pii > gen_tree(ll n = 0){
