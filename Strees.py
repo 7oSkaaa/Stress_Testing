@@ -46,9 +46,9 @@ for i in range(1, tests + 1):
     Correct_output = open("Correct_output.txt").read().strip()
     Test_output = open("Test_output.txt").read().strip()
     if Correct_output == Test_output:
-        print(f'\n{bold}{gold}Test_Case #{i}: {green}Passed ✅')
+        print(f'\n{bold}{gold}Test Case #{i}: {green}Passed ✅')
     else:
-        print(f'\n{bold}{gold}Test_Case #{i}: {red}failed ❌')
+        print(f'\n{bold}{gold}Test Case #{i}: {red}failed ❌')
         check_diff = True
         break
     

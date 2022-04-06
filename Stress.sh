@@ -39,10 +39,10 @@ do
     # differs(we are ignoring spaces and then comparing files)
     if diff --tabsize=1 -F --label --side-by-side --ignore-space-change Test_output.txt Correct_output.txt > dont_show_on_terminal.txt; then
         echo ""
-        echo "${orange}Test_Case #$i: ${bold}${green}Passed ✅${reset}"
+        echo "${orange}Test Case #$i: ${bold}${green}Passed ✅${reset}"
     else
         echo ""
-        echo "${orange}test_case #$i: ${bold}${red}Failed ❌${reset}"
+        echo "${orange}test case #$i: ${bold}${red}Failed ❌${reset}"
         diff_found=1
         break
     fi

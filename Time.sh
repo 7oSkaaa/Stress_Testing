@@ -20,7 +20,7 @@ g++ -std=c++17 "$SCRIPT_DIR"/Test.cpp -o Test || { echo "${bold}${orange}Compila
 
 while [ $i -le $tests ]
 do
-    echo "${orange}Test_Case #$i: ${white}"
+    echo "${orange}Test Case #$i: ${white}"
 
     # Generate test_case and save it in input.txt
     ./Generator > input.txt
