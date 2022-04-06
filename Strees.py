@@ -65,7 +65,8 @@ if check_diff == True:
     print(f'{bold}{white}\nExpected: {blue}')
     print(Correct_output)
 
-# delete temporary files
+# delete temporary files and make input.txt empty
+open('input.txt', "w").write('')
 os.remove(directory+'/Correct')
 os.remove(directory+'/Generator')
 os.remove(directory+'/Test')
