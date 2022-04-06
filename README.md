@@ -77,7 +77,7 @@ sudo apt-get install notify-osd
 
 <br> <br>
 
-Quick Demo: below the solution fails on randomly generated test #2: <br>
+Quick Demo: below the solution fails on randomly generated test #10: <br>
 
 ![  ](https://i.ibb.co/3drRPL4/Screenshot-from-2022-02-09-23-19-36.png)
 
