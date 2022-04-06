@@ -66,7 +66,7 @@ if check_diff == True:
     print(Correct_output)
 
 # delete temporary files and make input.txt empty
-open('input.txt', "w").write('')
+open('input.txt', "w")
 os.remove(directory+'/Correct')
 os.remove(directory+'/Generator')
 os.remove(directory+'/Test')
