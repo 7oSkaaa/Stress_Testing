@@ -103,3 +103,53 @@ The `Time.sh` will excecute `Test.cpp` the number of times you want and print yo
 Quick Demo: below the solution times on randomly generated test: <br>
 
 ![image](https://user-images.githubusercontent.com/63050133/153291510-924cd5ec-ea1b-4421-8947-ccd0419f2dda.png)
+
+
+---
+If you will use `Generator.cpp` file, these information will help you to use it.
+
+- Choose number of file you want to print in line `134`
+- Choose number of test cases in each file from line `131`
+- If your problem has a single test case uncomment line `130`
+
+there are many functions to help you to generate test like:
+
+- gen_string
+  - generate a string `Upper Case` or `Lower Case` and in any range you want with your length
+
+- gen_string_u_and_l
+  - generate a string `Upper Case` and `Lower Case` and in any range you want with your length
+ 
+- gen_int
+  - generate a integer number in the range you want from `L` to `R`
+
+- gen_palindrome
+  - generate a palindrome string with your length in the range that you want
+
+- gen_array
+  - generate an array with your size and in range you want, you can make the array `normal` or `increasing` or `decreasing`
+
+- gen_array_2D
+  - generate an array_2D with your size and in range you want.
+
+- gen_permutation
+  - generate an array with a permutation of `N`
+
+- gen_bit_int
+  - generate a string with your length consit of digit in the range that you want
+
+- gen_array_of_pairs
+  - generate an array of pairs with your length in the range that you want, you can choose if the pair is interval or not.
+
+- gen_char
+  - gen character in range that you want 
+
+- gen_tree
+  - generate a tree or `bamboo` like tree or `star` like tree
+
+- gen_graph
+  - generate a simple graph
+
+The test cases files will exported in `Tests` folder in the same directory of the `Generator.cpp` file
+
+---
