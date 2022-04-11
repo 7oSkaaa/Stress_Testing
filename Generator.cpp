@@ -4,6 +4,8 @@ using namespace std;
 #define ll long long
 #define accuracy chrono::steady_clock::now().time_since_epoch().count()
 #define Num_of_Digits(n) ((int)log10(n) + 1)
+#define all(vec) (vec.begin(), vec.end())
+#define sz(x) ((int) x.size())
 
 const int N = 1e6 + 4;
 
@@ -17,7 +19,6 @@ using pii = pair < ll, ll >;
 
 namespace generator {
 
-	
 	ll gen_int(ll l = -INF, ll r = INF){
 		uniform_int_distribution < ll > ludo(l, r); return ludo(rng);
 	}
@@ -67,6 +68,20 @@ namespace generator {
         return vec;
     }
 
+    vector < ll > gen_unique_array(int len = 0, ll minRange = -INF, ll maxRange = INF, bool Increasing = false, bool Decreasing = false){
+        assert(len >= 0 and len <= 5e6);
+        vector < ll > vec;
+        set < ll > st;
+        while(sz(st) != len)
+            st.insert(gen_int(minRange, maxRange));
+        for(auto& i : st)
+            vec.push_back(i);
+        if(Increasing) return vec;
+        if(Decreasing) return vector(vec.rbegin(), vec.rend());
+        shuffle(vec.begin(), vec.end(), rng);
+        return vec;
+    }
+
     vector < vector < ll > > gen_array_2D(int row = 0, int col = 0, ll minRange = -INF, int maxRange = INF){
 		assert(row >= 0 and row <= 5e6 && col >= 0 && col <= 5e6 && row * col <= 1e8);
 		vector < vector < ll > > vec(row);
@@ -92,10 +107,10 @@ namespace generator {
 		return str;
   	}
 
-    vector < pii > gen_array_of_pairs(int len = 0, ll minRange = -INF, ll maxRange = INF, bool interval = false){
+    vector < pii > gen_array_of_pairs(int len = 0, ll minRange = -INF, ll maxRange = INF){
         assert(len >= 0 and len <= 5e6);
         vector < pii > vec(len);
-        for (auto &[l, r]: vec) l = gen_int(minRange, maxRange), r = gen_int((interval ? l : minRange), maxRange);
+        for (auto &[l, r]: vec) l = gen_int(minRange, maxRange), r = gen_int(l, maxRange);
         return vec;
     }
 
