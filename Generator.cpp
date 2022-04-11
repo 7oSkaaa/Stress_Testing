@@ -191,7 +191,7 @@ signed main() {
     int t = 1;
     freopen("input.txt", "w", stdout);
     #ifndef SINGLE_TEST
-      t = rand(1, max_tests), cout << t << '\n';
+      t = gen_int(1, max_tests), cout << t << '\n';
     #endif
     while (t--) {
         generate_test();
