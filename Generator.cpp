@@ -5,7 +5,7 @@ using namespace std;
 #define accuracy chrono::steady_clock::now().time_since_epoch().count()
 #define Num_of_Digits(n) ((int)log10(n) + 1)
 #define all(vec) (vec.begin(), vec.end())
-#define sz(x) ((int) x.size())
+#define sz(x) (int) x.size()
 
 const int N = 1e6 + 4;
 
@@ -23,11 +23,14 @@ namespace generator {
 		uniform_int_distribution < ll > ludo(l, r); return ludo(rng);
 	}
 
-    string gen_string(int len = 0, bool upperCase = false, ll l = 1, ll r = 26) {
+    string gen_string(int len = 0, bool upperCase = false, char l = 'a', char r = 'z') {
         assert(len >= 0 && len <= 5e6);
         string str(len, (upperCase ? 'A' : 'a'));
         for (char &ch: str)
-            ch += gen_int(l, r) - 1;
+            if(upperCase)
+                ch = 'A' + gen_int(l - 'A', r - 'A');
+            else
+                ch = 'a' + gen_int(l - 'a', r - 'A');
         return str;
     }
 
@@ -107,10 +110,10 @@ namespace generator {
 		return str;
   	}
 
-    vector < pii > gen_array_of_pairs(int len = 0, ll minRange = -INF, ll maxRange = INF, bool interval = true){
+    vector < pii > gen_array_of_pairs(int len = 0, ll minRange = -INF, ll maxRange = INF, bool Interval = false){
         assert(len >= 0 and len <= 5e6);
         vector < pii > vec(len);
-        for (auto &[l, r]: vec) l = gen_int(minRange, maxRange), r = gen_int((interval ? l : minRange), maxRange);
+        for (auto &[l, r]: vec) l = gen_int(minRange, maxRange), r = gen_int((Interval ? l : minRange), maxRange);
         return vec;
     }
 
@@ -179,7 +182,7 @@ ostream& operator << (ostream &other, const vector < pair < ll, ll > > &v) {
 
 // comment the just below line if test cases required
 #define SINGLE_TEST
-const int max_tests = 5;
+constexpr int Tests = 1000;
 
 // complete this function according to the requirements
 void generate_test() {
@@ -191,7 +194,7 @@ signed main() {
     int t = 1;
     freopen("input.txt", "w", stdout);
     #ifndef SINGLE_TEST
-      t = gen_int(1, max_tests), cout << t << '\n';
+      t = gen_int(1, Tests), cout << t << '\n';
     #endif
     while (t--) {
         generate_test();
