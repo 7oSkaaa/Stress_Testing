@@ -40,8 +40,8 @@ except subprocess.CalledProcessError as e:
 
 for i in range(1, tests + 1):
     subprocess.run(["./Generator"], capture_output = True)
-    subprocess.run(["./Correct", "<", "/input.txt"], capture_output = True)
-    subprocess.run(["./Test", "<", "/input.txt"], capture_output = True)
+    subprocess.run(["./Correct", "<", "/input.txt"], capture_output = True, timeout=5)
+    subprocess.run(["./Test", "<", "/input.txt"], capture_output = True, timeout=5)
     Input = open("input.txt").read().strip()
     Correct_output = open("Correct_output.txt").read().strip()
     Test_output = open("Test_output.txt").read().strip()
