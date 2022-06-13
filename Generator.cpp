@@ -30,7 +30,7 @@ namespace generator {
             if(upperCase)
                 ch = 'A' + gen_int(l - 'A', r - 'A');
             else
-                ch = 'a' + gen_int(l - 'a', r - 'A');
+                ch = 'a' + gen_int(l - 'a', r - 'a');
         return str;
     }
 
@@ -42,7 +42,7 @@ namespace generator {
             if(is_upper)
                 ch = 'A' + gen_int(l - 'A', r - 'A');
             else
-                ch = 'a' + gen_int(l - 'a', r - 'A');
+                ch = 'a' + gen_int(l - 'a', r - 'a');
         }
         return str;
     }
