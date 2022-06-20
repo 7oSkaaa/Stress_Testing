@@ -1,5 +1,6 @@
 import os
 import subprocess
+import pyperclip
 
 #Colors to use
 red = '\033[38;5;196m'
@@ -64,6 +65,14 @@ if check_diff == True:
     #print the expected output
     print(f'{bold}{white}\nExpected: {blue}')
     print(Correct_output)
+    
+    with open('Failed.txt', 'w') as Failed_Test:
+        print("Input:\n" + Input + "\n\nOutput:\n" + Test_output + "\n\nExpected:\n" + Correct_output, file=Failed_Test)
+    
+    Failed_Test = open("Failed.txt", "r").read()
+    pyperclip.copy(Failed_Test)
+    
+    os.remove("Failed.txt")
 
 # delete temporary files and make input.txt empty
 open('input.txt', "w")
