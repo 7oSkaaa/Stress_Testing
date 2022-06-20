@@ -1,5 +1,6 @@
 import os
 import subprocess
+import pyperclip
 
 #Colors to use
 red = '\033[38;5;196m'
