@@ -56,7 +56,7 @@ def run(file_name, is_Generator):
         if is_Generator:
             subprocess.run(["./{}".format(file_name)], capture_output = True)
         else:
-            subprocess.run(["./{}".format(file_name), "<", "/input.txt"], capture_output = True, timeout=5)
+            subprocess.run(["./{}".format(file_name), "<", "/input.txt"], capture_output = True, timeout=2)
     except subprocess.TimeoutExpired:
         print(f'{bold}{red}\nTime Limit Exceeded in {file_name}.cpp ⏳{reset}\n')
         with open('input.txt', "r") as Input_File:
