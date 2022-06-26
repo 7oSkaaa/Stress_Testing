@@ -44,7 +44,7 @@ void Fast_IO(){
 }
 
 void Solve(){
-    
+       
 }
 
 int main(){
