@@ -16,14 +16,15 @@ reset = '\033[0m'
 directory = os.path.dirname(os.path.realpath(__file__))
 os.chdir(directory)
 
+# Function to Handle error of delete file not found
 def delete_file(file):
     try:
         os.remove(file)
     except:
         pass
 
+# delete temporary files and make input.txt empty
 def Reset_Folder():
-    # delete temporary files and make input.txt empty
     open('input.txt', "w")
     delete_file(directory+'/Correct')
     delete_file(directory+'/Generator')
@@ -33,6 +34,7 @@ def Reset_Folder():
     delete_file("Failed.txt")
     print()
 
+# copy the failed test cases to clipboard
 def copy_failed_test():
     with open('Failed.txt', 'w') as Failed_Test:
         print("Input:\n" + Input + "\n\nOutput:\n" + Test_output + "\n\nExpected:\n" + Correct_output, file=Failed_Test)
