@@ -58,16 +58,11 @@ namespace generator {
     vector < ll > gen_array(int len = 0, ll minRange = -INF, ll maxRange = INF, bool Increasing = false, bool Decreasing = false){
         assert(len >= 0 and len <= 5e6);
         vector < ll > vec(len);
-        ll Delta = max(maxRange / len, 1ll);
         for (auto &x: vec) x = gen_int(minRange, maxRange);
-        if(Increasing){
-            for(int i = 0; i < len; i++)
-                vec[i] = (i == 0 ? 0 : vec[i - 1]) + Delta;
-        }
-        if(Decreasing){
-            for(int i = len - 1; i >= 0; i--)
-                vec[i] = (i == len - 1 ? 0 : vec[i + 1]) + Delta;
-        }
+        if(Increasing)
+            sort(vec.begin(), vec.end());
+        if(Decreasing)
+            sort(vec.begin(), vec.end(), greater < ll > ());
         return vec;
     }
 
@@ -82,6 +77,15 @@ namespace generator {
         if(Increasing) return vec;
         if(Decreasing) return vector(vec.rbegin(), vec.rend());
         shuffle(vec.begin(), vec.end(), rng);
+        return vec;
+    }
+
+    vector < ll > gen_pyramid_array(int len = 0, ll minRange = -INF, ll maxRange = INF){
+        assert(len >= 0 and len <= 5e6);
+        int inc = gen_int(0, len), dec = len - inc;
+        vector < ll > vec = gen_array(inc, minRange, maxRange, true, false);
+        vector < ll > vec2 = gen_array(dec, minRange, maxRange, false, true);
+        vec.insert(vec.end(), vec2.begin(), vec2.end());
         return vec;
     }
 
