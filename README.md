@@ -33,8 +33,16 @@ You can run `Strees.py` from the terminal or you can run with **vscode** or any 
 
 The script will ask you to enter the number of `testcases`
 
-Output:<br> The output of running file `Strees.sh` on every test case is either `Accepted` if your solution's output matches the brute solution output or `Wrong Answer` and will show the input on which the solution failed, the output of your solution and expected output according to the brute force solution on terminal and the script will be terminated. Now you can debug your original solution and check where it goes wrong. <br>
+Output:<br> The output of running file `Strees.py` on every test case is either `Accepted` if your solution's output matches the brute solution output or `Wrong Answer` and will show the input on which the solution failed, the output of your solution and expected output according to the brute force solution on terminal and the script will be terminated. Now you can debug your original solution and check where it goes wrong. <br>
 If you wish to terminate the script at any moment you wish use the command `ctrl + c` in your terminal.<br>
+
+### Change the time limit
+
+The script will ask you to enter the time limit in `seconds` and the script will terminate if your solution will exceed the time limit
+
+### Custom Checker
+
+The script will ask you if you want to use a custom checker, if you want to use a custom checker you can write your checker in the file `Checker.cpp` and the script will use it to check your solution output, if you want to use the default checker just press `Enter` and the script will use the default checker
 
 <br> <br>
 
