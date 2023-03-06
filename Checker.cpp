@@ -34,13 +34,39 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
 
 void Fast_IO(){
     ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
-    #ifndef ONLINE_JUDGE
-        freopen("input.txt", "r", stdin), freopen("Correct_output.txt", "w", stdout);
-    #endif
+}
+
+// if the output of the Test.cpp isn't correct so use exit(-1)
+
+// it's better to make the input global so you can access it from any function
+
+int n;
+vector < int > a;
+
+void Input(){
+    freopen("input.txt", "r", stdin);
+    // get the input from here
+
+}
+
+void Correct_Output(){
+    freopen("Correct_output.txt", "r", stdin);
+    // get the correct output here
+
+}
+
+void Test_Output(){
+    freopen("Test_output.txt", "r", stdin);
+    // check here if the output is correct or not
+    // if it's not correct so use exit(-1) to stop the program and print WA
+
 }
 
 void Solve(){
-    
+    // comment on the function that you don't need it
+    Input();
+    Correct_Output();
+    Test_Output();
 }
 
 int main(){
@@ -50,4 +76,4 @@ int main(){
     while(t--)
         Solve();
     return 0;
-} 
+}
