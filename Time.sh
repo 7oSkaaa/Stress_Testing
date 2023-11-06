@@ -14,9 +14,9 @@ i=1
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # You can change the version of C++ or add the compiler flags you wish
-g++ -std=c++17 "$SCRIPT_DIR"/Generator.cpp -o Generator || { echo "${bold}${orange}Compilation Error in ${reset}" Generator.cpp; exit 1; }
+g++ -std=c++2a "$SCRIPT_DIR"/Generator.cpp -o Generator || { echo "${bold}${orange}Compilation Error in ${reset}" Generator.cpp; exit 1; }
 
-g++ -std=c++17 "$SCRIPT_DIR"/Test.cpp -o Test || { echo "${bold}${orange}Compilation Error${reset}" in Test.cpp; exit 1; }
+g++ -std=c++2a "$SCRIPT_DIR"/Test.cpp -o Test || { echo "${bold}${orange}Compilation Error${reset}" in Test.cpp; exit 1; }
 
 while [ $i -le $tests ]
 do
