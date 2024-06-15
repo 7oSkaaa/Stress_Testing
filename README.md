@@ -55,7 +55,7 @@ The script will prompt you to enter the number of test cases and the time limit 
 - **Time Limit Exceeded**: If your solution exceeds the time limit.
 - **Runtime Error**: If your solution crashes.
 
-### Generating Test Cases with Generator.cpp
+## Generating Test Cases with Generator.cpp
 
 If you use Generator.cpp, these functions will help you generate test cases:
 
