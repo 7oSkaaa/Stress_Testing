@@ -50,10 +50,10 @@ The script will prompt you to enter the number of test cases and the time limit 
 
 ## Outputs
 
-- **Accepted**: If your solution's output matches the brute force solution output.
-- **Wrong Answer**: Displays the input on which the solution failed, the output of your solution, and the expected output according to the brute force solution.
-- **Time Limit Exceeded**: If your solution exceeds the time limit.
-- **Runtime Error**: If your solution crashes.
+- ***Accepted***: If your solution's output matches the brute force solution output.
+- ***Wrong Answer***: Displays the input on which the solution failed, the output of your solution, and the expected output according to the brute force solution.
+- ***Time Limit Exceeded***: If your solution exceeds the time limit.
+- ***Runtime Error***: If your solution crashes.
 
 ## Generating Test Cases with Generator.cpp
 
