@@ -10,18 +10,10 @@ Stress Testing is crucial for competitive programming to ensure the accuracy and
 
 ## Installation
 
-1. Clone this repository:
-
-    ```bash
-    git clone https://github.com/yourusername/stress_testing.git
-    cd stress_testing
-    ```
-
-2. Install necessary dependencies:
-
-    ```bash
-    pip install -r requirements.txt
-    ```
+  ```bash
+  git clone https://github.com/yourusername/stress_testing.git
+  cd stress_testing
+  ```
 
 ## Usage
 
