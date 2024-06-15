@@ -53,33 +53,7 @@ The script will prompt you to enter the number of test cases and the time limit 
 - **Accepted**: If your solution's output matches the brute force solution output.
 - **Wrong Answer**: Displays the input on which the solution failed, the output of your solution, and the expected output according to the brute force solution.
 - **Time Limit Exceeded**: If your solution exceeds the time limit.
-
-## Additional Scripts for Linux Users
-
-### Stress.sh
-
-Linux users can also use `stress.sh` for stress testing.
-
-1. **Edit the Number of Test Cases**: Modify the number of test cases by editing line 21 in `stress.sh`.
-2. **Run**:
-
-    ```bash
-    chmod +x stress.sh
-    ./stress.sh
-    ```
-
-### Time.sh
-
-For checking the execution time of your solution.
-
-1. **Prepare Your Solution**: Copy your solution into `cpp_files/test.cpp`.
-2. **Edit the Number of Test Cases**: Modify the number of test cases by editing line 10 in `time.sh`.
-3. **Run**:
-
-    ```bash
-    chmod +x time.sh
-    ./time.sh
-      ```
+- **Runtime Error**: If your solution crashes.
 
 ### Generating Test Cases with Generator.cpp
 
