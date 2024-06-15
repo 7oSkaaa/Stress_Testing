@@ -1,52 +1,48 @@
 #include <bits/stdc++.h>
-#define ll long long
-#define endl '\n'
-#define EPS 1e-9
+
 using namespace std;
-void Haidy();
 
-int dx[] = {0, 0, 1, -1, 1, -1, 1, -1};
-int dy[] = {1, -1, 0, 0, 1, -1, -1, 1};
-const ll MOD = (int)1e9 + 7;
-const auto PI = std::acos(-1);
+#define fixed(n) fixed << setprecision(n)
+#define ceil(n, m) (((n) + (m) - 1) / (m))
+#define add_mod(a, b, m) (((a % m) + (b % m)) % m)
+#define sub_mod(a, b, m) (((a % m) - (b % m) + m) % m)
+#define mul_mod(a, b, m) (((a % m) * (b % m)) % m)
+#define all(vec) vec.begin(), vec.end()
+#define rall(vec) vec.rbegin(), vec.rend()
+#define sz(x) int(x.size())
+#define debug(x) cout << #x << ": " << (x) << "\n";
+#define fi first
+#define se second
+#define ll long long
+#define ull unsigned long long
+#define EPS 1e-9
+constexpr int INF = 1 << 30, Mod = 1e9 + 7;
+constexpr ll LINF = 1LL << 62;
+#define PI acos(-1)
+template < typename T = int > using Pair = pair < T, T >;
+vector < string > RET = {"NO", "YES"};
 
-void solveTest() {
-    ll h, n;
-    cin >> h >> n;
-    vector<ll> d(n), cool(n);
-    for(auto&i: d)
-        cin >> i;
-    for(auto& i : cool)
-        cin >> i;
+template < typename T = int > istream& operator >> (istream &in, vector < T > &v) {
+    for (auto &x : v) in >> x;
+    return in;
+}
 
-    ll l = 1, r = 1e12;
-    while(l <= r){
-        ll m = (r+l)/2;
-        ll cnt = 0;
-        for(ll i = 0; i < n; i++){
-            cnt += ((m-1)/cool[i] + 1)*d[i];
-        }
-        if(cnt >= h)
-            r = m-1;
-        else
-            l = m+1;
+template < typename T = int > ostream& operator << (ostream &out, const vector < T > &v) { 
+    for (const T &x : v) out << x << ' '; 
+    return out;
+}
+
+void Solve(){
+    
+}
+
+int main(){
+    ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
+    int test_cases = 1;
+    // cin >> test_cases;
+    for(int tc = 1; tc <= test_cases; tc++){
+        // cout << "Case #" << tc << ": ";
+        Solve();
     }
-    cout << l << endl;
-}
-
-int main() {
-    Haidy();
-    int testCases = 1;
-    // cin >> testCases;
-    cout << fixed << setprecision(9);
-    while(testCases--)
-        solveTest();
     return 0;
-}
-
-void Haidy() {
-    cin.tie(nullptr), cout.tie(nullptr), cin.sync_with_stdio(false), cout.sync_with_stdio(false);
-    #ifdef Clion
-        freopen("input.txt", "r", stdin), freopen("output.txt", "w", stdout);
-    #endif
 }

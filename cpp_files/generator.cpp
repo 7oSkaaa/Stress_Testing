@@ -190,10 +190,7 @@ constexpr int Tests = 1000;
 
 // complete this function according to the requirements
 void generate_test() {
-    int h = gen_int(1, 2e6), n = gen_int(1, 2e6);
-    cout << h << ' ' << n << '\n';
-    vector < ll > a = gen_array(n, 1, 2e5), c = gen_array(n, 1, 2e5);
-    cout << a << '\n' << c << '\n';
+    
 }
 
 signed main() {
