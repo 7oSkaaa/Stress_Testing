@@ -30,3 +30,21 @@
 *.exe
 *.out
 *.app
+
+# Debug files
+*.dSYM/
+
+# Kernel Module Compile Results
+*.ko
+
+# .vscode
+.vscode/
+
+# .idea
+.idea/
+
+# .DS_Store
+.DS_Store
+
+# python cache regex
+__pycache__/
