@@ -1,7 +1,7 @@
 import subprocess
 import os
 from contextlib import nullcontext
-from .directory import change_directory_to_root
+from .file_handler import change_directory_to_root
 
 @change_directory_to_root
 def compile_file(file_name: str) -> None:

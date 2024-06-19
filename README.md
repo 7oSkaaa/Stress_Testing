@@ -80,11 +80,11 @@ If you use Generator.cpp, these functions will help you generate test cases:
 │   └───📄 test_output.txt
 ├───📄 Structures.md
 ├───📁 utils
-│   ├───📄 toolkit.py
-│   └───📄 directory.py
+│   ├───📄 file_handler.py
+│   └───📄 cpp_compiler.py
 ├───📄 README.md
 ├───📄 .gitignore
 ├───📄 stress_testing.py
 └───📁 helpers
-    └───📄 colors.py
+    └───📄 terminal_colors.py
 ```

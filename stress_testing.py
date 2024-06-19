@@ -1,5 +1,6 @@
-from helpers.colors import Colors
-from utils import directory, toolkit
+from Stress_Testing.helpers.terminal_colors import Colors
+from Stress_Testing.utils import cpp_compiler
+from Stress_Testing.utils import file_handler
 
 
 def stress_testing():
@@ -20,7 +21,7 @@ def stress_testing():
 
     for file in list_of_files:
         try:
-            toolkit.compile_file(file)
+            cpp_compiler.compile_file(file)
         except KeyError as e:
             print(f"\n{Colors.fg.red}{e}{Colors.reset}")
             return
@@ -28,7 +29,7 @@ def stress_testing():
     for test in range(1, test_cases + 1):
         for index in range(len(list_of_files)):
             try:
-                toolkit.validate_errors(
+                cpp_compiler.validate_errors(
                     list_of_files[index],
                     list_of_input_files[index],
                     list_of_output_files[index],
@@ -39,7 +40,7 @@ def stress_testing():
                 print(f"\n{Colors.fg.red}{e}{Colors.reset}")
                 return
 
-        if toolkit.check_diff("correct_output.txt", "test_output.txt"):
+        if cpp_compiler.check_diff("correct_output.txt", "test_output.txt"):
             print(
                 f"{Colors.fg.white}Test case {test} {Colors.fg.green}passed! ✅{Colors.reset}"
             )
@@ -49,13 +50,13 @@ def stress_testing():
             )
 
             print(f"{Colors.fg.purple}Input: {Colors.reset}")
-            toolkit.print_output("input.txt")
+            cpp_compiler.print_output("input.txt")
 
             print(f"{Colors.fg.purple}Expected Output: {Colors.reset}")
-            toolkit.print_output("correct_output.txt")
+            cpp_compiler.print_output("correct_output.txt")
 
             print(f"{Colors.fg.purple}Your Output: {Colors.reset}")
-            toolkit.print_output("test_output.txt")
+            cpp_compiler.print_output("test_output.txt")
 
             return
 
@@ -66,4 +67,4 @@ def stress_testing():
 
 if __name__ == "__main__":
     stress_testing()
-    directory.clean_up()
+    file_handler.clean_up()
