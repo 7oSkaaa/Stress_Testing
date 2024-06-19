@@ -48,3 +48,9 @@
 
 # python cache regex
 __pycache__/
+
+# python env
+venv/
+
+# Structure markdown
+Structures.md

@@ -1,5 +1,5 @@
 from helpers.colors import Colors
-from utils import utils
+from utils import directory, toolkit
 
 
 def stress_testing():
@@ -20,7 +20,7 @@ def stress_testing():
 
     for file in list_of_files:
         try:
-            utils.compile_file(file)
+            toolkit.compile_file(file)
         except KeyError as e:
             print(f"\n{Colors.fg.red}{e}{Colors.reset}")
             return
@@ -28,7 +28,7 @@ def stress_testing():
     for test in range(1, test_cases + 1):
         for index in range(len(list_of_files)):
             try:
-                utils.validate_errors(
+                toolkit.validate_errors(
                     list_of_files[index],
                     list_of_input_files[index],
                     list_of_output_files[index],
@@ -39,7 +39,7 @@ def stress_testing():
                 print(f"\n{Colors.fg.red}{e}{Colors.reset}")
                 return
 
-        if utils.check_diff("correct_output.txt", "test_output.txt"):
+        if toolkit.check_diff("correct_output.txt", "test_output.txt"):
             print(
                 f"{Colors.fg.white}Test case {test} {Colors.fg.green}passed! ✅{Colors.reset}"
             )
@@ -49,13 +49,13 @@ def stress_testing():
             )
 
             print(f"{Colors.fg.purple}Input: {Colors.reset}")
-            utils.print_output("input.txt")
+            toolkit.print_output("input.txt")
 
             print(f"{Colors.fg.purple}Expected Output: {Colors.reset}")
-            utils.print_output("correct_output.txt")
+            toolkit.print_output("correct_output.txt")
 
             print(f"{Colors.fg.purple}Your Output: {Colors.reset}")
-            utils.print_output("test_output.txt")
+            toolkit.print_output("test_output.txt")
 
             return
 
@@ -66,4 +66,4 @@ def stress_testing():
 
 if __name__ == "__main__":
     stress_testing()
-    utils.clean_up()
+    directory.clean_up()

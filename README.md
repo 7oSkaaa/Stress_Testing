@@ -65,3 +65,26 @@ If you use Generator.cpp, these functions will help you generate test cases:
 - gen_char: Generate a character in the range you want.
 - gen_tree: Generate a tree or a specific type like a bamboo or star tree.
 - gen_graph: Generate a simple graph.
+
+## Folder Structure
+
+```python
+📁 Stress_Testing
+├───📁 cpp_files
+│   ├───📄 generator.cpp
+│   ├───📄 test.cpp
+│   └───📄 correct.cpp
+├───📁 txt_files
+│   ├───📄 input.txt
+│   ├───📄 correct_output.txt
+│   └───📄 test_output.txt
+├───📄 Structures.md
+├───📁 utils
+│   ├───📄 toolkit.py
+│   └───📄 directory.py
+├───📄 README.md
+├───📄 .gitignore
+├───📄 stress_testing.py
+└───📁 helpers
+    └───📄 colors.py
+```
