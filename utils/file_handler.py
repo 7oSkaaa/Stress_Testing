@@ -26,9 +26,9 @@ def delete_file(file: str) -> None:
         os.remove(os.path.join(directory, file))
     except OSError:
         pass
-    
-    
+
+
 def clean_up():
-    delete_file("cpp_files/generator")
-    delete_file("cpp_files/correct")
-    delete_file("cpp_files/test")
+    delete_file("cpp_src/generator")
+    delete_file("cpp_src/correct")
+    delete_file("cpp_src/test")

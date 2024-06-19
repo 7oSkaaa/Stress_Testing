@@ -1,6 +1,6 @@
-from Stress_Testing.helpers.terminal_colors import Colors
-from Stress_Testing.utils import cpp_compiler
-from Stress_Testing.utils import file_handler
+from helpers import Colors
+from utils import cpp_compiler
+from utils import file_handler
 
 
 def stress_testing():

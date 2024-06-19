@@ -19,9 +19,9 @@ Stress Testing is crucial for competitive programming to ensure the accuracy and
 
 ### Preparing Your Code
 
-1. **Original Solution**: Copy your original solution which you expect might fail into `cpp_files/test.cpp`.
-2. **Brute Force Solution**: Copy your brute force solution, which is expected to give the correct output, into `cpp_files/correct.cpp`.
-3. **Test Case Generator**: Modify `cpp_files/generator.cpp` to generate test cases according to the question. `generator.cpp` will export the test cases to the `txt_files/input.txt` file.
+1. **Original Solution**: Copy your original solution which you expect might fail into `cpp_src/test.cpp`.
+2. **Brute Force Solution**: Copy your brute force solution, which is expected to give the correct output, into `cpp_src/correct.cpp`.
+3. **Test Case Generator**: Modify `cpp_src/generator.cpp` to generate test cases according to the question. `generator.cpp` will export the test cases to the `test_data/input.txt` file.
 
 ### Running the Stress Test
 
@@ -70,21 +70,22 @@ If you use Generator.cpp, these functions will help you generate test cases:
 
 ```python
 📁 Stress_Testing
-├───📁 cpp_files
+├───📁 cpp_src
 │   ├───📄 generator.cpp
 │   ├───📄 test.cpp
 │   └───📄 correct.cpp
-├───📁 txt_files
+├───📁 test_data
 │   ├───📄 input.txt
 │   ├───📄 correct_output.txt
 │   └───📄 test_output.txt
-├───📄 Structures.md
 ├───📁 utils
 │   ├───📄 file_handler.py
-│   └───📄 cpp_compiler.py
+│   ├───📄 cpp_compiler.py
+│   └───📄 __init__.py
 ├───📄 README.md
 ├───📄 .gitignore
 ├───📄 stress_testing.py
 └───📁 helpers
+    ├───📄 __init__.py
     └───📄 terminal_colors.py
 ```

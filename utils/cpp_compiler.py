@@ -3,9 +3,10 @@ import os
 from contextlib import nullcontext
 from .file_handler import change_directory_to_root
 
+
 @change_directory_to_root
 def compile_file(file_name: str) -> None:
-    file_path = os.path.join("cpp_files", file_name)
+    file_path = os.path.join("cpp_src", file_name)
     try:
         subprocess.run(
             ["g++", "-std=c++2a", f"{file_path}.cpp", "-o", file_path],
@@ -23,10 +24,10 @@ def compile_file(file_name: str) -> None:
 def run_file(
     file_name: str, input_file_name: str, output_file_name: str, time_limit: float = 2.0
 ):
-    file_path = os.path.join("cpp_files", file_name) if file_name else None
-    input_path = os.path.join("txt_files", input_file_name) if input_file_name else None
+    file_path = os.path.join("cpp_src", file_name) if file_name else None
+    input_path = os.path.join("test_data", input_file_name) if input_file_name else None
     output_path = (
-        os.path.join("txt_files", output_file_name) if output_file_name else None
+        os.path.join("test_data", output_file_name) if output_file_name else None
     )
 
     if file_path and not os.path.isfile(file_path):
@@ -64,7 +65,7 @@ def run_file(
 
 def normalize_output(output_file: str) -> list[str]:
     directory = os.getcwd()
-    output_path = os.path.join(directory, "txt_files", output_file)
+    output_path = os.path.join(directory, "test_data", output_file)
     try:
         with open(output_path, "r") as file:
             output = file.read().strip()
@@ -104,7 +105,7 @@ def validate_errors(
 
 @change_directory_to_root
 def print_output(output_file: str) -> None:
-    output_path = os.path.join("txt_files", output_file)
+    output_path = os.path.join("test_data", output_file)
     try:
         with open(output_path, "r") as file:
             print(file.read())
