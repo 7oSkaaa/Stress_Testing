@@ -13,7 +13,7 @@ def stress_testing():
         )
     )
 
-    print(f"{Colors.fg.white}\n=========================={Colors.reset}")
+    print(f"{Colors.fg.white}\n=========================={Colors.reset}\n")
 
     list_of_files = ["generator", "correct", "test"]
     list_of_input_files = ["", "input.txt", "input.txt"]
@@ -49,6 +49,8 @@ def stress_testing():
                 f"{Colors.fg.red}Wrong Answer {Colors.fg.white}on test case {test} ❌{Colors.reset}"
             )
 
+            print(f"{Colors.fg.white}\n=========================={Colors.reset}\n")
+                
             print(f"{Colors.fg.purple}Input: {Colors.reset}")
             cpp_compiler.print_output("input.txt")
 
@@ -57,6 +59,8 @@ def stress_testing():
 
             print(f"{Colors.fg.purple}Your Output: {Colors.reset}")
             cpp_compiler.print_output("test_output.txt")
+
+            print(f"{Colors.fg.white}=========================={Colors.reset}\n")
 
             return
 
