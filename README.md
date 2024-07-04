@@ -11,7 +11,7 @@ Stress Testing is crucial for competitive programming to ensure the accuracy and
 ## Installation
 
   ```bash
-  git clone https://github.com/yourusername/stress_testing.git
+  git clone https://github.com/7oSkaaa/stress_testing.git
   cd stress_testing
   ```
 
