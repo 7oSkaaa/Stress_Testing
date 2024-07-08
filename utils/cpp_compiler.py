@@ -1,5 +1,6 @@
 import subprocess
 import os
+import platform
 from contextlib import nullcontext
 from .file_handler import change_directory_to_root
 
@@ -7,9 +8,10 @@ from .file_handler import change_directory_to_root
 @change_directory_to_root
 def compile_file(file_name: str) -> None:
     file_path = os.path.join("cpp_src", file_name)
+    output_file = file_path + ".exe" if platform.system() == "Windows" else file_path
     try:
         subprocess.run(
-            ["g++", "-std=c++2a", f"{file_path}.cpp", "-o", file_path],
+            ["g++", f"{file_path}.cpp", "-o", output_file],
             check=True,
             capture_output=True,
             text=True,
@@ -25,6 +27,8 @@ def run_file(
     file_name: str, input_file_name: str, output_file_name: str, time_limit: float = 2.0
 ):
     file_path = os.path.join("cpp_src", file_name) if file_name else None
+    if platform.system() == "Windows": file_path += ".exe"
+    
     input_path = os.path.join("test_data", input_file_name) if input_file_name else None
     output_path = (
         os.path.join("test_data", output_file_name) if output_file_name else None
@@ -41,7 +45,7 @@ def run_file(
         ) as outfile:
             # Build command as a list of arguments
             command = [
-                f"./{file_path}",
+                f"{file_path}" if platform.system() == "Windows" else f"./{file_path}",
                 f"< /{input_path}" if input_path else "",
                 f"> /{output_path}" if output_path else "",
             ]
