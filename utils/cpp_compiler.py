@@ -1,21 +1,36 @@
-import subprocess
 import os
+import subprocess
 import platform
+import shutil
 from contextlib import nullcontext
 from .file_handler import change_directory_to_root
 
 
+def get_executable_extension() -> str:
+    system_platform = platform.system().lower()
+    if system_platform == "windows":
+        return ".exe"
+    return ""  # No extension for Linux/macOS
+
+
+def get_default_compiler() -> str:
+    return "g++" if platform.system().lower() != "darwin" else "g++-13"
+
+
 @change_directory_to_root
-def compile_file(file_name: str) -> None:
-    file_path = os.path.join("cpp_src", file_name)
-    output_file = file_path + ".exe" if platform.system() == "Windows" else file_path
+def compile_file(file_name: str, output_dir="cpp_src") -> None:
+    # Get the full path of the file and the output file
+    file_path = os.path.join(output_dir, file_name)
+    output_file = file_path + get_executable_extension()
+
+    # Get the default C++ compiler available on the system
+    compiler = get_default_compiler()
+
+    # Prepare the compiler command dynamically
+    command = [compiler, f"{file_path}.cpp", "-o", output_file]
+
     try:
-        subprocess.run(
-            ["g++", f"{file_path}.cpp", "-o", output_file],
-            check=True,
-            capture_output=True,
-            text=True,
-        )
+        subprocess.run(command, check=True, capture_output=True, text=True, shell=False)
     except subprocess.CalledProcessError as e:
         raise KeyError(f"Compilation Error in {file_name}.cpp: {e.stderr}")
     except FileNotFoundError:
@@ -26,30 +41,30 @@ def compile_file(file_name: str) -> None:
 def run_file(
     file_name: str, input_file_name: str, output_file_name: str, time_limit: float = 2.0
 ):
-    file_path = os.path.join("cpp_src", file_name) if file_name else None
-    if platform.system() == "Windows": file_path += ".exe"
-    
+    # Get the platform-specific executable path
+    file_path = os.path.join("cpp_src", file_name)
+    file_path = file_path + get_executable_extension()
+
+    # Resolve input and output file paths
     input_path = os.path.join("test_data", input_file_name) if input_file_name else None
     output_path = (
         os.path.join("test_data", output_file_name) if output_file_name else None
     )
 
-    if file_path and not os.path.isfile(file_path):
+    # Check if files exist
+    if not os.path.isfile(file_path):
         raise FileNotFoundError(f"Executable '{file_path}' not found.")
-    if input_path and not os.path.isfile(input_path) and input_file_name:
+    if input_path and not os.path.isfile(input_path):
         raise FileNotFoundError(f"Input file '{input_path}' not found.")
 
     try:
-        with open(input_path, "r") if input_path else nullcontext() as infile, open(
-            output_path, "w"
+        # Open input and output files using context management
+        with open(input_path, "r") if input_path else nullcontext() as infile, (
+            open(output_path, "w") if output_path else nullcontext()
         ) as outfile:
-            # Build command as a list of arguments
-            command = [
-                f"{file_path}" if platform.system() == "Windows" else f"./{file_path}",
-                f"< /{input_path}" if input_path else "",
-                f"> /{output_path}" if output_path else "",
-            ]
-
+            # Build the command with the correct platform-specific executable
+            command = [file_path]
+            # Run the command with proper file handling
             run_result = subprocess.run(
                 command,
                 check=True,
@@ -58,13 +73,12 @@ def run_file(
                 stdout=outfile if output_path else subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 text=True,
-                shell=True,
             )
         return run_result
     except subprocess.TimeoutExpired as e:
-        raise e
+        raise TimeoutError(f"Execution timed out after {time_limit} seconds.") from e
     except subprocess.CalledProcessError as e:
-        raise e
+        raise RuntimeError(f"Error occurred while running the file: {e.stderr}") from e
 
 
 def normalize_output(output_file: str) -> list[str]:
