@@ -22,7 +22,7 @@ def stress_testing():
     for file in list_of_files:
         try:
             cpp_compiler.compile_file(file_name=file)
-        except KeyError as e:
+        except ValueError as e:
             print(f"\n{Colors.fg.red}{e}{Colors.reset}")
             return
 
@@ -36,7 +36,7 @@ def stress_testing():
                     test,
                     time_limit,
                 )
-            except KeyError as e:
+            except Exception as e:
                 print(f"\n{Colors.fg.red}{e}{Colors.reset}")
                 return
 

@@ -10,25 +10,21 @@ def change_directory_to_root(func):
 
         try:
             os.chdir(root_directory)
-            result = func(*args, **kwargs)
+            return func(*args, **kwargs)
         finally:
             os.chdir(current_directory)
-
-        return result
 
     return wrapper_change_directory_to_root
 
 
 @change_directory_to_root
-def delete_file(file: str) -> None:
-    directory = os.getcwd()
-    try:
-        os.remove(os.path.join(directory, file))
-    except OSError:
-        pass
+def delete_file(file_path: str) -> None:
+    full_path = os.path.join(os.getcwd(), file_path)
+    if os.path.isfile(full_path):
+        os.remove(full_path)
 
 
 def clean_up():
-    delete_file("cpp_src/generator")
-    delete_file("cpp_src/correct")
-    delete_file("cpp_src/test")
+    delete_file(os.path.join("cpp_src", "generator"))
+    delete_file(os.path.join("cpp_src", "correct"))
+    delete_file(os.path.join("cpp_src", "test"))
