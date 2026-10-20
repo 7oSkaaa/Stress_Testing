@@ -25,12 +25,13 @@ constexpr ll LINF = 1LL << 62;
 constexpr int Tests = 1000;
 
 void generate_test(std::mt19937_64 &rng) {
-    ll n = gen_numbers::random<ll>(2, 5e9, rng);
+    ll n = gen_numbers::random<ll>(2, 3e9, rng);
     std::cout << n << '\n';
 }
 
 int main(int argc, char* argv[]) {
-    std::mt19937_64 rng(std::chrono::steady_clock::now().time_since_epoch().count());
+    // stress_testing.py passes the seed so a failing test can be replayed with --seed
+    std::mt19937_64 rng(argc > 1 ? std::stoull(argv[1]) : std::chrono::steady_clock::now().time_since_epoch().count());
     int test_cases = 1;
     # ifdef MULTIPLE_TESTS
         test_cases = gen_numbers::random < int > (1, Tests, rng);

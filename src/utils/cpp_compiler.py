@@ -1,182 +1,137 @@
 import os
-import subprocess
 import platform
-from contextlib import nullcontext
-from typing import Optional
+import signal
+import subprocess
+import time
+from dataclasses import dataclass
 from pathlib import Path
-from .file_handler import change_directory_to_root
+from typing import Optional
+
+ROOT = Path(__file__).resolve().parents[2]
+CPP_DIR = ROOT / "cpp"
+BIN_DIR = ROOT / "bin"
+EXE_SUFFIX = ".exe" if platform.system() == "Windows" else ""
+FLAGS = ["-std=c++17", "-O2"]
+SANITIZE_FLAGS = ["-fsanitize=address,undefined", "-fno-sanitize-recover=all", "-g"]
+
+# Windows reports crashes as NTSTATUS exit codes instead of signals.
+WINDOWS_CRASHES = {
+    0xC0000005: "ACCESS_VIOLATION",
+    0xC000001D: "ILLEGAL_INSTRUCTION",
+    0xC0000094: "INTEGER_DIVIDE_BY_ZERO",
+    0xC00000FD: "STACK_OVERFLOW",
+    0xC0000409: "STACK_BUFFER_OVERRUN",
+}
 
 
-def get_executable_extension() -> str:
-    """Return the executable extension for the current OS."""
-    return ".exe" if platform.system().lower() == "windows" else ""
+class CompilationError(Exception):
+    pass
 
 
-def get_default_compiler() -> str:
-    """Return the default C++ compiler for the current OS, with env override and fallback."""
-    compiler = os.environ.get("CXX")
-    if compiler:
-        return compiler
-    system = platform.system().lower()
-    if system == "darwin":
-        # Prefer c++ (AppleClang), fallback to clang++
-        from shutil import which
-        if which("c++"):
-            return "c++"
-        if which("clang++"):
-            return "clang++"
-        return "g++"  # fallback, but not recommended on macOS
+def decode(data: Optional[bytes]) -> str:
+    # backslashreplace shows invalid bytes as \xff, so outputs differing only in such bytes still look different.
+    return (data or b"").decode("utf-8", errors="backslashreplace")
+
+
+@dataclass
+class Run:
+    stdout: bytes
+    stderr: str
+    returncode: Optional[int]  # None when the program was killed for exceeding the time limit
+    seconds: float
+
+    @property
+    def status(self) -> Optional[str]:
+        if self.returncode is None:
+            return "TIME LIMIT EXCEEDED"
+        if self.returncode != 0:
+            return "RUNTIME ERROR"
+        return None
+
+    @property
+    def exit_info(self) -> str:
+        if self.returncode is None:
+            return f"killed after {self.seconds:.2f}s"
+        if self.returncode < 0:
+            try:
+                return signal.Signals(-self.returncode).name
+            except ValueError:
+                return f"signal {-self.returncode}"
+        if self.returncode in WINDOWS_CRASHES:
+            return WINDOWS_CRASHES[self.returncode]
+        hex_code = f" ({self.returncode:#x})" if self.returncode > 255 else ""
+        return f"exit code {self.returncode}{hex_code}"
+
+
+def find_compiler() -> str:
+    """Return $CXX, else the newest g++-<version> on PATH on macOS, else g++."""
+    if os.environ.get("CXX"):
+        return os.environ["CXX"]
+    if platform.system() == "Darwin":
+        # Apple's g++ is Clang, which has no <bits/stdc++.h>; Homebrew GCC installs as g++-<version>.
+        versioned = [
+            path
+            for directory in os.environ.get("PATH", "").split(os.pathsep)
+            for path in Path(directory).glob("g++-*")
+            if path.name[4:].isdigit()
+        ]
+        if versioned:
+            return max(versioned, key=lambda path: int(path.name[4:])).name
     return "g++"
 
 
-@change_directory_to_root
-def compile_file(file_name: str, output_dir: str = "cpp") -> None:
-    """
-    Compile a C++ file in the given directory.
-    Args:
-        file_name: Name of the C++ file (without .cpp extension)
-        output_dir: Directory containing the C++ file (default: 'cpp')
-    Raises:
-        ValueError: If compilation fails.
-    """
-    file_path = Path(output_dir) / file_name
-    output_file = str(file_path) + get_executable_extension()
-    # Check if file exists before compiling
-    if not (file_path.with_suffix('.cpp')).is_file():
-        raise ValueError(f"Source file '{file_path.with_suffix('.cpp')}' not found.")
-    command = [get_default_compiler(), "-std=c++17", f"{file_path}.cpp", "-o", output_file]
+def compile_flags(sanitize: bool) -> list:
+    return FLAGS + (SANITIZE_FLAGS if sanitize else [])
+
+
+def compile_command(name: str, sanitize: bool) -> list:
+    # Paths relative to ROOT: shorter error messages, and MinGW cannot open some non-ASCII absolute paths.
+    return [find_compiler(), *compile_flags(sanitize), f"cpp/{name}.cpp", "-o", f"bin/{name}{EXE_SUFFIX}"]
+
+
+def _is_up_to_date(binary: Path, stamp: Path, source: Path, command: list) -> bool:
+    if not binary.is_file() or not stamp.is_file() or stamp.read_text(encoding="utf-8") != " ".join(command):
+        return False
+    newest_source = max(path.stat().st_mtime for path in [source, *CPP_DIR.rglob("*.h")])
+    return binary.stat().st_mtime >= newest_source
+
+
+def _hint(stderr: str, sanitize: bool) -> str:
+    if "bits/stdc++.h" in stderr:
+        return "\nHint: this compiler has no <bits/stdc++.h>. Install GCC (macOS: brew install gcc) or set CXX."
+    if sanitize and ("-lasan" in stderr or "-lubsan" in stderr or "sanitize" in stderr):
+        return "\nHint: this compiler has no sanitizers (MinGW never does). Run without --sanitize, or use Linux, macOS or WSL."
+    return ""
+
+
+def compile_file(name: str, sanitize: bool = False) -> Path:
+    """Compile cpp/<name>.cpp into bin/, skipping the build when the binary is newer than every source."""
+    source = CPP_DIR / f"{name}.cpp"
+    binary = BIN_DIR / (name + EXE_SUFFIX)
+    stamp = binary.with_name(binary.name + ".args")
+    command = compile_command(name, sanitize)
+    if not source.is_file():
+        raise CompilationError(f"Source file 'cpp/{name}.cpp' not found.")
+    if _is_up_to_date(binary, stamp, source, command):
+        return binary
+
+    BIN_DIR.mkdir(exist_ok=True)
     try:
-        subprocess.run(command, check=True, capture_output=True, text=True)
-    except subprocess.CalledProcessError as e:
-        raise ValueError(f"Compilation Error in {file_name}.cpp ⚠️\n{e.stderr}")
+        result = subprocess.run(command, cwd=ROOT, capture_output=True)
+    except FileNotFoundError:
+        raise CompilationError(f"Compiler '{command[0]}' not found. Install g++ or set the CXX environment variable.")
+    if result.returncode != 0:
+        stderr = decode(result.stderr)
+        raise CompilationError(f"Compilation error in {name}.cpp\n{stderr}{_hint(stderr, sanitize)}")
+    stamp.write_text(" ".join(command), encoding="utf-8")
+    return binary
 
 
-def _get_file_path(base_dir: str, file_name: Optional[str]) -> Optional[str]:
-    if file_name:
-        return str(Path(base_dir) / file_name)
-    return None
-
-
-@change_directory_to_root
-def run_file(
-    file_name: str,
-    input_file_name: Optional[str] = None,
-    output_file_name: Optional[str] = None,
-    time_limit: float = 2.0,
-):
-    """
-    Run a compiled C++ executable with optional input/output redirection and time limit.
-    Args:
-        file_name: Name of the executable (without extension)
-        input_file_name: Input file name (from 'data/')
-        output_file_name: Output file name (to 'data/')
-        time_limit: Time limit in seconds
-    Raises:
-        FileNotFoundError: If executable or input file is missing
-        RuntimeError: If the program returns a non-zero exit code
-        TimeoutError: If the program exceeds the time limit
-    Returns:
-        subprocess.CompletedProcess: The result of the run
-    """
-    file_path = str(Path("cpp") / (file_name + get_executable_extension()))
-    input_path = _get_file_path("data", input_file_name)
-    output_path = _get_file_path("data", output_file_name)
-
-    if not os.path.isfile(file_path):
-        raise FileNotFoundError(f"Executable '{file_path}' not found.")
-    if input_path and not os.path.isfile(input_path):
-        raise FileNotFoundError(f"Input file '{input_path}' not found.")
-
-    with open(input_path, "r") if input_path else nullcontext() as infile, \
-         open(output_path, "w") if output_path else nullcontext() as outfile:
-        command = [file_path]
-        try:
-            result = subprocess.run(
-                command,
-                check=True,
-                timeout=time_limit,
-                stdin=infile,
-                stdout=outfile,
-                stderr=subprocess.PIPE,
-                text=True,
-            )
-        except subprocess.CalledProcessError as e:
-            raise RuntimeError(f"Runtime Error: {e.stderr}")
-        except subprocess.TimeoutExpired:
-            raise TimeoutError(f"Time Limit Exceeded for {file_name}.cpp ⏳")
-    return result
-
-
-def normalize_output(output_file: str) -> list[str]:
-    """
-    Read and normalize output file into a list of tokens.
-    Args:
-        output_file: Output file name (from 'data/')
-    Returns:
-        List of tokens (strings)
-    """
-    output_path = str(Path.cwd() / "data" / output_file)
-    if not os.path.isfile(output_path):
-        return []
-    with open(output_path, "r") as file:
-        return [token for line in file for token in line.strip().split()]
-
-
-@change_directory_to_root
-def check_diff(output1: str, output2: str) -> bool:
-    """
-    Check if two output files are identical after normalization.
-    Args:
-        output1: First output file name (from 'data/')
-        output2: Second output file name (from 'data/')
-    Returns:
-        True if outputs are identical, False otherwise
-    """
-    return normalize_output(output1) == normalize_output(output2)
-
-
-@change_directory_to_root
-def validate_errors(
-    file_name: str,
-    input_file_name: str,
-    output_file_name: str,
-    test: int,
-    time_limit: float = 2.0,
-):
-    """
-    Run a file and handle common errors, raising ValueError with a clear message.
-    Args:
-        file_name: Name of the executable (without extension)
-        input_file_name: Input file name (from 'data/')
-        output_file_name: Output file name (to 'data/')
-        test: Test case number
-        time_limit: Time limit in seconds
-    Raises:
-        ValueError: If file not found, runtime error, or time limit exceeded
-    """
+def run(binary: Path, stdin: bytes, time_limit: float, *args: str) -> Run:
+    """Run a program on raw bytes, so tests pass between programs unchanged on every OS."""
+    start = time.perf_counter()
     try:
-        return run_file(file_name, input_file_name, output_file_name, time_limit)
-    except FileNotFoundError as e:
-        raise ValueError(f"File not found: {e}")
-    except RuntimeError as e:
-        raise ValueError(f"Runtime Error in {file_name}.cpp on test case {test} ⚠️\n{e}")
-    except TimeoutError:
-        raise ValueError(
-            f"Time Limit Exceeded in {file_name}.cpp on test case {test} ⏳"
-        )
-
-
-@change_directory_to_root
-def print_output(output_file: str) -> None:
-    """
-    Print the contents of an output file.
-    Args:
-        output_file: Output file name (from 'data/')
-    Raises:
-        FileNotFoundError: If the file does not exist
-    """
-    output_path = str(Path("data") / output_file)
-    if not os.path.isfile(output_path):
-        raise FileNotFoundError(f"File '{output_path}' not found.")
-    with open(output_path, "r") as file:
-        print(file.read())
+        result = subprocess.run([str(binary), *args], input=stdin, capture_output=True, timeout=time_limit)
+    except subprocess.TimeoutExpired as e:
+        return Run(e.stdout or b"", decode(e.stderr), None, time.perf_counter() - start)
+    return Run(result.stdout, decode(result.stderr), result.returncode, time.perf_counter() - start)
