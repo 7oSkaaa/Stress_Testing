@@ -2,6 +2,8 @@
 #include <vector>
 #include <set>
 #include <algorithm>
+#include <cassert>
+#include <numeric>
 #include <random>
 
 namespace gen_arrays {
@@ -9,14 +11,16 @@ namespace gen_arrays {
     std::vector < T > random (int len, T l, T r, std::mt19937_64 &rng, bool unique = false, bool sorted = false) {
         std::vector < T > v;
         if (unique) {
+            assert((long double)r - l + 1 >= len);
             std::set < T > s;
             while ((int)s.size() < len) s.insert(std::uniform_int_distribution < T > (l, r)(rng));
             v.assign(s.begin(), s.end());
+            if (!sorted) std::shuffle(v.begin(), v.end(), rng);
         } else {
             v.resize(len);
             for (auto &x : v) x = std::uniform_int_distribution < T > (l, r)(rng);
+            if (sorted) std::sort(v.begin(), v.end());
         }
-        if (sorted) std::sort(v.begin(), v.end());
         return v;
     }
 
@@ -54,28 +58,31 @@ namespace gen_arrays {
     // Generate a unique subset of size k from [l, r]
     template < typename T = long long >
     std::vector < T > subset (T l, T r, int k, std::mt19937_64 &rng, bool sorted = false) {
-        std::set < T > s;
-        while ((int)s.size() < k) s.insert(std::uniform_int_distribution < T > (l, r)(rng));
-        std::vector < T > v(s.begin(), s.end());
-        if (!sorted) std::shuffle(v.begin(), v.end(), rng);
+        return random < T > (k, l, r, rng, true, sorted);
+    }
+
+    // Generate a random array with a given sum, each element in [min_val, max_val]
+    template < typename T = long long >
+    std::vector < T > random_with_sum (int len, T sum, T min_val, T max_val, std::mt19937_64 &rng) {
+        assert(len > 0 && min_val * len <= sum && sum <= max_val * len);
+        std::vector < T > v(len, min_val);
+        T rest = sum - min_val * len, cap = max_val - min_val;
+        for (int i = 0; i < len; ++i) {
+            // the elements after i can absorb at most others * cap, so take at least the excess
+            T others = len - 1 - i;
+            T lo = others == 0 ? rest : (rest / others >= cap ? rest - others * cap : 0);
+            T delta = std::uniform_int_distribution < T > (lo, std::min(rest, cap))(rng);
+            v[i] += delta;
+            rest -= delta;
+        }
+        std::shuffle(v.begin(), v.end(), rng);
         return v;
     }
 
     // Partition a sum into k parts, each in [min_val, max_val]
     template < typename T = long long >
     std::vector < T > partition (T sum, int k, T min_val, T max_val, std::mt19937_64 &rng) {
-        std::vector < T > parts(k, min_val);
-        sum -= min_val * k;
-        for (int i = 0; i < k && sum > 0; ++i) {
-            T add = std::min(sum, max_val - min_val);
-            if (add > 0) {
-                T delta = std::uniform_int_distribution < T > (0, add)(rng);
-                parts[i] += delta;
-                sum -= delta;
-            }
-        }
-        std::shuffle(parts.begin(), parts.end(), rng);
-        return parts;
+        return random_with_sum < T > (k, sum, min_val, max_val, rng);
     }
 
     // Generate an array with a fixed step (arithmetic progression)
@@ -141,23 +148,6 @@ namespace gen_arrays {
             v[i] = cur;
             if (i + 1 < len) cur -= std::uniform_int_distribution < T > (step_min, step_max)(rng);
         }
-        return v;
-    }
-
-    // Generate a random array with a given sum
-    template < typename T = long long >
-    std::vector < T > random_with_sum (int len, T sum, T min_val, T max_val, std::mt19937_64 &rng) {
-        std::vector < T > v(len, min_val);
-        sum -= min_val * len;
-        for (int i = 0; i < len && sum > 0; ++i) {
-            T add = std::min(sum, max_val - min_val);
-            if (add > 0) {
-                T delta = std::uniform_int_distribution < T > (0, add)(rng);
-                v[i] += delta;
-                sum -= delta;
-            }
-        }
-        std::shuffle(v.begin(), v.end(), rng);
         return v;
     }
 }

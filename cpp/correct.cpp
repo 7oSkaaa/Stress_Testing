@@ -4,9 +4,9 @@ using namespace std;
 
 #define fixed(n) fixed << setprecision(n)
 #define ceil(n, m) (((n) + (m) - 1) / (m))
-#define add_mod(a, b, m) (((a % m) + (b % m)) % m)
-#define sub_mod(a, b, m) (((a % m) - (b % m) + m) % m)
-#define mul_mod(a, b, m) (((a % m) * (b % m)) % m)
+#define add_mod(a, b, m) ((((a) % (m)) + ((b) % (m))) % (m))
+#define sub_mod(a, b, m) ((((a) % (m)) - ((b) % (m)) + (m)) % (m))
+#define mul_mod(a, b, m) ((((a) % (m)) * ((b) % (m))) % (m))
 #define all(vec) vec.begin(), vec.end()
 #define rall(vec) vec.rbegin(), vec.rend()
 #define sz(x) int(x.size())

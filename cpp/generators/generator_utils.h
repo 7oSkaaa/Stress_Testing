@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <iostream>
+#include <string>
 #include <utility>
 #include <tuple>
 
@@ -36,7 +37,7 @@ namespace gen_utils {
         std::cout << val << '\n';
     }
     // Print a vector of strings
-    void print (const std::vector < std::string > &v) {
+    inline void print (const std::vector < std::string > &v) {
         for (const auto &s : v) std::cout << s << '\n';
     }
 }

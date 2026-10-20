@@ -2,17 +2,16 @@
 #include <string>
 #include <random>
 #include <cassert>
+#include <cctype>
 #include <vector>
 
 namespace gen_strings {
     enum class CaseType { Lower, Upper, Mixed };
 
     inline char random_char (CaseType caseType, std::mt19937_64 &rng, char l = 'a', char r = 'z') {
-        char base = (caseType == CaseType::Upper) ? 'A' : 'a';
-        char ch = base + std::uniform_int_distribution<int>(l - base, r - base)(rng);
-        if (caseType == CaseType::Mixed && std::uniform_int_distribution<int>(0, 1)(rng))
-            ch = std::islower(ch) ? std::toupper(ch) : std::tolower(ch);
-        return ch;
+        char ch = std::uniform_int_distribution<int>(l, r)(rng);
+        bool upper = caseType == CaseType::Upper || (caseType == CaseType::Mixed && std::uniform_int_distribution<int>(0, 1)(rng));
+        return upper ? std::toupper(ch) : std::tolower(ch);
     }
 
     inline std::string random (int len, CaseType caseType, std::mt19937_64 &rng, char l = 'a', char r = 'z') {
