@@ -54,3 +54,8 @@ venv/
 
 # Structure markdown
 Structures.md
+
+# Build output and saved failing tests
+bin/
+build/
+data/

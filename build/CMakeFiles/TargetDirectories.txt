@@ -1,5 +1,0 @@
-/Users/ahmedkhalil/Codes/Personal/CPP/Stress_Testing/build/CMakeFiles/generator.dir
-/Users/ahmedkhalil/Codes/Personal/CPP/Stress_Testing/build/CMakeFiles/test.dir
-/Users/ahmedkhalil/Codes/Personal/CPP/Stress_Testing/build/CMakeFiles/correct.dir
-/Users/ahmedkhalil/Codes/Personal/CPP/Stress_Testing/build/CMakeFiles/edit_cache.dir
-/Users/ahmedkhalil/Codes/Personal/CPP/Stress_Testing/build/CMakeFiles/rebuild_cache.dir
